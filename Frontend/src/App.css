@@ -1,0 +1,14 @@
+#root{
+    min-height: 100vh;
+    background-color: rgba(8, 7, 7, 0.905);
+    color: white;
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+.subheading
+{
+    background-color: rgb(139, 174, 163);
+    color: black;
+    padding: 10px;
+    text-align: center;
+}

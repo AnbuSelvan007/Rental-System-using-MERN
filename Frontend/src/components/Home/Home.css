@@ -1,0 +1,116 @@
+.homeContainer{
+
+    .dashboard{
+       margin-bottom: 5px;
+    }
+    /* Slider.jsx */
+    .sliderContainer{
+        display: flex;
+        overflow:hidden;
+        height: 80vh;
+        .wrapper{
+            width: 100vw;
+            margin: 0px 15vw 0px 15vw;
+            animation: slide 40s linear infinite;
+            animation-timing-function: ease-in-out;
+            .sliderItem{  
+                height:78vh;
+                width: 70vw;
+                background-color: white;
+                border-radius: 20px;
+                
+                img{
+                     height:72vh; 
+                     width: 70vw;  
+                     border-radius: 20px  20px 0px  0px;
+                     border: none;  
+                 
+                }
+                h3{
+                    height: 5vh;
+                    color: black;
+                    text-align: center;
+                }
+               
+            }
+        }
+    }
+    .serviceDescription{
+       
+        .title{
+            text-align: center;
+            font-size: 45px;
+            margin-top:80px;
+            margin-bottom: 20px;
+        }
+       .wrapper{
+        display: flex;
+        border-bottom: 2px solid rgba(68, 65, 65, 0.644);
+
+        .gifContainer{
+
+            height:350px;
+            object-fit: cover;
+            img{
+                height:350px;
+            }
+        }
+        .textContainer{
+            font-size: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+       }
+        
+    }
+}
+
+@keyframes slid {
+    0%, 12.5% { transform: translateX(0); }          /* Image 1 */
+    13.5%, 25% { transform: translateX(-100vw); }    /* Image 2 */
+    26%, 37.5% { transform: translateX(-200vw); }    /* Image 3 */
+    38.5%, 50% { transform: translateX(-300vw); }    /* Image 4 */
+    51%, 62.5% { transform: translateX(-300vw); }    /* Pause at last image */
+    63.5%, 75% { transform: translateX(-200vw); }    /* Reverse to Image 3 */
+    76%, 87.5% { transform: translateX(-100vw); }    /* Reverse to Image 2 */
+    88.5%, 100% { transform: translateX(0); }        /* Back to Image 1 */
+  }
+@media (max-width:400px) {
+    .homeContainer{
+
+      
+        /* Slider.jsx */
+        .sliderContainer{
+            display: flex;
+            overflow:hidden;
+            height: 35vh;
+            .wrapper{
+                width: 100vw;
+                margin: 0px 15vw 0px 15vw;
+                animation: slide 40s linear infinite;
+                animation-timing-function: ease-in-out;
+                .sliderItem{  
+                    height:100%;
+                    width: 70vw;
+                    background-color: white;
+                    border-radius: 20px;
+                    
+                    img{
+                         height:30vh; 
+                         width: 70vw;  
+                         border-radius: 20px  20px 0px  0px;
+                         border: none;  
+                     
+                    }
+                    h3{
+                        height: 5vh;
+                        color: black;
+                        text-align: center;
+                    }
+                   
+                }
+            }
+        }
+    }
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import './App.css'
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import Services from "./components/Services/Services";
@@ -10,16 +11,16 @@ import SignUp from "./components/Signup/SignUp";
 import Complaint from "./components/Complaints/Complaint";
 import Navbar from "./components/Navbar/Navbar";
 import Equipments from "./components/Services/Equipments";
+import '../node_modules/bootstrap/dist/css/bootstrap-reboot.min.css'
 function App() {
   return (
     <>
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/" element={<Login />} />
+          <Route path="/Login" element={<Login />} />
           <Route path="/SignUp" element={<SignUp />} />
-          <Route path="/Home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/About" element={<About />} />
           <Route path="/Services" element={<Services />} />
           <Route path="/Services/Cars" element={<Cars />} />
