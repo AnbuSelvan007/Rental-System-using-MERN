@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import './App.css'
 import Home from "./components/Home/Home";
@@ -13,13 +13,14 @@ import '../node_modules/bootstrap/dist/css/bootstrap-reboot.min.css'
 import Bicycles from "./components/Services/Bicycles";
 import Vans from "./components/Services/Vans";
 import BookDetail from "./components/BookingDetails/BookDetail";
-
+import Cart from "./components/MyCart/Cart";
+export const UserContext = createContext();
 function App() {
   const location=useLocation();
+  const [userprof,setUserprof]=useState({userName:"undefined",userEmail:"undefined",userPhone:"undefined"})
   return (
     <>
-    
-    
+    <UserContext.Provider value={{userprof,setUserprof}}>
       {location.pathname!=='/' &&  <Navbar />}
         <Routes>
           <Route path="/" element={<Login />} />
@@ -28,12 +29,14 @@ function App() {
           <Route path="/Services" element={<Services />} />
           <Route path="/Cars" element={<Cars />} />
           <Route path="/Bikes" element={<Bikes />} />
-          <Route path="/Bicycles" element={< Bicycles/>} />\
-          <Route path="/Vans" element={< Vans/>} />\
+          <Route path="/Bicycles" element={< Bicycles/>} />
+          <Route path="/Vans" element={<Vans/>} />
           <Route path="/Complaints" element={<Complaint />} />
           <Route path="/BookingDetails" element={<BookDetail />} />
+          <Route path="/Cart" element={<Cart />} />
+
         </Routes>
-    
+        </UserContext.Provider>
     </>
   );
 }

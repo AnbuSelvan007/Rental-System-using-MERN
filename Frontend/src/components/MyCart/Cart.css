@@ -1,0 +1,75 @@
+.cartContainer{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 10px;
+    .cartWrapper{
+        background-color:rgb(74, 68, 68);
+        height: 40vh;
+        width: 20vw;
+        text-align: center;
+        border-radius: 20px;
+        img{
+        height: 25vh;
+        width: 20vw;
+        border-radius: 20px 20px 0px 0px;
+
+        }
+       button{
+       background-color: orange;
+        color: white;
+        border: none;
+        padding: 10px;
+        width: 50%;
+        border-radius: 10px;
+        font-size: 20px;
+        transition: 0.5s;
+       }
+       button:hover{
+        background-color: green;
+       
+       }
+       
+
+    }
+
+    .details{
+        position:absolute;
+        top: 30vh;
+        display: flex;
+        flex-direction: column;
+        background-color: white;
+        color: black;
+        padding: 20px;
+        border-radius: 20px;
+        width: 600px;
+        display: none;
+        .box{
+            display: flex;
+            align-items: center;
+           
+        }
+        h2:nth-child(1){
+            width: 45%;
+           
+        }
+        button{
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+            font-size: 18px;
+        }
+        button:nth-child(1)
+        {
+            width: 40%;
+            margin-right: 5%;
+        }
+        button:nth-child(2){
+            width: 50%;
+        }
+        
+    }
+    .show{
+        display: flex;
+    }
+}

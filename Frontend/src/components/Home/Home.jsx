@@ -1,5 +1,6 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Slider from "./Slider";
+import axios from "axios";
 import "./Home.css";
 import Navbar from "../Navbar/Navbar";
 
@@ -39,18 +40,30 @@ const service_details = [
       "Planning a family trip, corporate outing, or a group adventure? Our traveller van rental service offers spacious and comfortable vans that can accommodate large groups with ease. Whether you need a 10-seater, 12-seater, or even a 20-seater, we have the right van for your journey.",
     para2:
       "You can choose to rent with a driver for a stress-free ride or opt for a self-drive option, provided you have a valid driving license and complete a simple verification process at our office. Our vans are fully air-conditioned, well-maintained, and equipped with comfortable seating, making long trips more enjoyable.With flexible hourly and daily rental options, you can rent the van as per your travel needs. Book a traveller van today and enjoy a hassle-free group journey with comfort and convenience! ",
-  },
-  // {
-  //   id: 5,
-  //   name: "Equipment Rentals – Affordable & Reliable for Every Event!",
-  //   img: "",
-  //   para1:
-  //     "Hosting an event, party, or corporate gathering? We provide high-quality equipment rentals, including speakers, chairs, tables, and sofas, to make your event seamless and comfortable. Whether you need premium sound systems for a concert, stylish sofas for a lounge setup, or sturdy tables and chairs for a large gathering, we’ve got you covered.",
-  //   para2:
-  //     "Our rental process is simple and hassle-free, with flexible booking options for hourly, daily, or long-term use. We ensure that all our equipment is well-maintained, sanitized, and ready to use. Whether you're organizing a wedding, business conference, birthday party, or any special occasion, our rental services will help you set up with ease.Book your speakers, chairs, tables, and sofas today and create a perfect event without the hassle of buying and storing equipment! ",
-  // },
+  }
 ];
 const Home = () => {
+  const [loading,setLoading]=useState(false)
+  const [home_details,setHome_details ]=useState([])
+  useState(()=>{
+
+    const fetchHome = async () => {
+    try{
+      setLoading(true)
+      const response= await axios.get("http://localhost:5000/home").catch((err)=>console.log(err))
+      setHome_details(response.data)
+    }
+    catch(err){
+      console.log(err)
+    }
+    finally{
+      setLoading(false)
+    }
+
+  }
+  fetchHome();
+    
+  },[])
   return (
     <div className="homeContainer">
       <div className="dashboard subheading">
@@ -62,7 +75,7 @@ const Home = () => {
       </div>
 
       <div className="serviceDescription">
-        {service_details.map((item) => (
+        { !loading && home_details.map((item) => (
           <>
            <div className="title">
            <h3>{item.name}</h3>
@@ -82,6 +95,9 @@ const Home = () => {
           </div>
           </>
         ))}
+        { loading && <h2>loading...</h2>
+
+        }
       </div>
     </div>
   );

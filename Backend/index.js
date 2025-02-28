@@ -7,9 +7,10 @@ const user = require("./model/signupSchema");
 const bcrypt = require("bcrypt");
 const bodyparser = require("body-parser");
 const cors = require("cors");
+const nodemailer=require('nodemailer')
+const {Home_Details,About_Details}=require('./model/HomeAbout')
 const { Bikes, Cars, Vans, Bicycles } = require("./model/serviceDetails");
 const Bookings = require("./model/bookingDetails");
-const mail=require('./controller/mail')
 dotenv.config();
 mdb
   .connect(process.env.MONGODB_URL)
@@ -22,7 +23,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-app.use(mail)
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "view", "Login.html"));
 });
@@ -60,7 +61,7 @@ app.post("/signin", async (req, res) => {
     if (!data) return res.status(200).json({ message: "Invalid email" });
     const isMatched = await bcrypt.compare(password, data.password);
     if (isMatched) {
-      res.status(200).json({ message: "SignIn Successfull", isLoggedIn: true });
+      res.status(200).json({ message: "SignIn Successfull", isLoggedIn: true,phone:data.phone,name:data.name });
     } else {
       res.status(200).json({ message: "wrong password", isLoggedIn: false });
     }
@@ -232,6 +233,7 @@ app.get("/bicycles", async (req, res) => {
   }
 });
 
+//cart.jsx data
 app.get("/bookingdetails", async (req, res) => {
   try {
     const {email}=req.body;
@@ -240,6 +242,140 @@ app.get("/bookingdetails", async (req, res) => {
     res.json(bookings);
   } catch (err) {
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.delete("/bookingdetails/:id", async (req, res) => {
+  try {
+    const deletedItem = await Rental.findByIdAndDelete(req.params.id);
+    if (!deletedItem) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+    res.json({ message: "Item deleted successfully", deletedItem });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting item", error });
+  }
+});
+
+//Home.jsx About.jsx
+app.get('/about',async(req,res)=>{
+  try{
+    const data= await About_Details.find({});
+    if(!data)
+      return res.status(404).json({message:"data not found"})
+    res.json(data)
+
+  }
+  catch(err)
+  {
+    res.status(500).json({message:"Internal Error"})
+  }
+  
+
+})
+
+app.get('/home',async(req,res)=>{
+  try{
+    const data= await Home_Details.find({});
+    if(!data)
+      return res.status(404).json({message:"data not found"})
+    res.json(data)
+
+  }
+  catch(err)
+  {
+    res.status(500).json({message:"Internal Error"})
+  }
+  
+
+})
+
+app.post('/home',(req,res)=>{
+   try{
+    const {name,img,para1,para2}=req.body;
+    const newDetail=new Home_Details({
+      name:name,
+      img:img,
+      para1:para1,
+      para2:para2
+    })
+    newDetail.save();
+    res.status(200).json({message:"Home detail Added successfully"})
+   }
+   catch(err)
+   {
+    res.status(500).json({message:"Internal server Error"})
+   }
+})
+
+app.post('/about',(req,res)=>{
+  try{
+   const {name,img,para}=req.body;
+   const newDetail=new About_Details({
+     name:name,
+     img:img,
+     para:para,
+    
+   })
+   newDetail.save();
+   res.status(200).json({message:"Home detail Added successfully"})
+  }
+  catch(err)
+  {
+   res.status(500).json({message:"Internal server Error"})
+   console.log(err)
+  }
+})
+
+
+app.get('/Home',(req,res)=>{
+  try{
+    const data=Home_Details.find({});
+    if(!data)
+      res.status(404).json({message:"data not found"})
+    res.json(data)
+
+  }
+  catch(err)
+  {
+    res.status(500).json({message:"Internal Error"})
+    console.log(err)
+  }
+  
+
+})
+
+
+
+//complaint mailing UNDER CONSTRUCTION
+app.post("/complaint", async (req, res) => {
+  const { name, email, message,complaintType } = req.body;
+
+  if (!name || !email || !complaintType || !message) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  try {
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "pocess,env.EMAIL_USER", // Your Gmail
+        pass:process.env.EMAIL_PASS, // Use an App Password if needed
+      },
+    });
+
+    let mailOptions = {
+      from: "narutoshinchan1234@gmail.com",
+      to: email,
+      subject: "Complaint Received",
+      text: `Dear ${name},\n\nYour complaint regarding "${complaintType}" has been received:\n\n"${message}"\n\nOur team will get back to you shortly.\n\nBest Regards,\nCustomer Support`,
+    };
+
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: "Complaint submitted successfully. Email sent!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error submitting complaint" });
   }
 });
 

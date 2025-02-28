@@ -86,19 +86,19 @@
             overflow:hidden;
             height: 35vh;
             .wrapper{
-                width: 100vw;
-                margin: 0px 15vw 0px 15vw;
+                width: 95vw;
+               margin:0px 2.5vw 10px 2.5vw;
                 animation: slide 40s linear infinite;
                 animation-timing-function: ease-in-out;
                 .sliderItem{  
                     height:100%;
-                    width: 70vw;
+                    width: 100%;
                     background-color: white;
                     border-radius: 20px;
                     
                     img{
                          height:30vh; 
-                         width: 70vw;  
+                         width: 95vw;  
                          border-radius: 20px  20px 0px  0px;
                          border: none;  
                      
@@ -112,5 +112,41 @@
                 }
             }
         }
+    }
+
+
+    .serviceDescription{
+       
+        .title{
+            text-align: center;
+            font-size: 35px;
+            font-weight: 500;
+            margin-top:80px;
+            margin-bottom: 20px;
+        }
+       .wrapper{
+        display: flex;
+        flex-direction: column;
+        border-bottom: 2px solid rgba(68, 65, 65, 0.644);
+
+        .gifContainer{
+
+           text-align: center;
+            object-fit: cover;
+            img{
+                
+                width: 300px;
+                height: 30px;
+            }
+        }
+        .textContainer{
+            font-size: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 20px;
+        }
+       }
+        
     }
 }

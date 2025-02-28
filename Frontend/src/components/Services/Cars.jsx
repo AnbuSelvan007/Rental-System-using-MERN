@@ -7,7 +7,7 @@ const Cars = () => {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/vans");
+        const response = await axios.get("http://localhost:5000/cars");
         setCarDetails(response.data); 
       } catch (error) {
         console.error("Error fetching cars:", error);

@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../App";
 import "./BookDetail.css";
-const BookDetail = ({ item }) => {
+const BookDetail = ({ state }) => {
+  const {userprof,setUserprof}=useContext(UserContext)
   const navigate=useNavigate()
+  console.log(data)
   const [user, setUser] = useState({
-    name: "",
-    withdriver: "",
-    phone: "",
+    name: userprof.userName,
+    phone:userprof.userPhone,
     date: "",
     count: "",
-    price: "",
+    price:data,
     days: "",
     withdriver: false,
   });

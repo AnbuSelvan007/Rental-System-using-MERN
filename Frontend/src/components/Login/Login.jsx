@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
@@ -6,8 +6,9 @@ import name from '../../../public/assets/name.png'
 import password from '../../../public/assets/password.png'
 import phone from '../../../public/assets/phone.png'
 import email from '../../../public/assets/email.png'
-
+import { UserContext } from "../../App";
 const Login = () => {
+  const {userProf,setUserprof}=useContext(UserContext)
   const [newUser, setNewUser] = useState(false);
   const [user,setUser]=useState({name:"",password:"",phone:"",email:""})
   const navigate = useNavigate();
@@ -20,7 +21,6 @@ const Login = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault()
-    console.log(user)
     //signup
     if(newUser)
     {
@@ -31,6 +31,8 @@ const Login = () => {
        alert(message)
        if(isSignUp)
        {
+        setUserprof({userName:user.name,userEmail:user.email,userPhone:user.phone})
+        console.log(userProf)
          navigate("/Home")
        }
         
@@ -42,8 +44,9 @@ const Login = () => {
       const message=response.data.message;
       const isLogIn=response.data.isLoggedIn;
       alert(message)
-      if(isLogIn)
+      if(isLogIn) 
       {
+        setUserprof({userName:response.data.name,userEmail:user.email,userPhone:response.data.phone})
         navigate("/Home")
       }
       console.log(response)
