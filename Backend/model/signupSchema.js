@@ -10,5 +10,5 @@ const signupSchema=mdb.Schema(
    
 
 
-const user=mdb.model("userDetails",signupSchema)
+const user=mdb.model("Login_User_Detail",signupSchema)
 module.exports=user;

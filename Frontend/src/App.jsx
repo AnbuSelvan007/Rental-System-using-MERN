@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import './App.css'
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
@@ -7,28 +7,33 @@ import Services from "./components/Services/Services";
 import Bikes from "./components/Services/Bikes";
 import Cars from "./components/Services/Cars";
 import Login from "./components/Login/Login";
-import SignUp from "./components/Signup/SignUp";
 import Complaint from "./components/Complaints/Complaint";
 import Navbar from "./components/Navbar/Navbar";
-import Equipments from "./components/Services/Equipments";
 import '../node_modules/bootstrap/dist/css/bootstrap-reboot.min.css'
+import Bicycles from "./components/Services/Bicycles";
+import Vans from "./components/Services/Vans";
+import BookDetail from "./components/BookingDetails/BookDetail";
+
 function App() {
+  const location=useLocation();
   return (
     <>
-      <BrowserRouter>
-        <Navbar />
+    
+    
+      {location.pathname!=='/' &&  <Navbar />}
         <Routes>
-          <Route path="/Login" element={<Login />} />
-          <Route path="/SignUp" element={<SignUp />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/Home" element={<Home />} />
           <Route path="/About" element={<About />} />
           <Route path="/Services" element={<Services />} />
-          <Route path="/Services/Cars" element={<Cars />} />
-          <Route path="/Services/Bikes" element={<Bikes />} />
-          <Route path="/Services/Equipments" element={<Equipments />} />
+          <Route path="/Cars" element={<Cars />} />
+          <Route path="/Bikes" element={<Bikes />} />
+          <Route path="/Bicycles" element={< Bicycles/>} />\
+          <Route path="/Vans" element={< Vans/>} />\
           <Route path="/Complaints" element={<Complaint />} />
+          <Route path="/BookingDetails" element={<BookDetail />} />
         </Routes>
-      </BrowserRouter>
+    
     </>
   );
 }

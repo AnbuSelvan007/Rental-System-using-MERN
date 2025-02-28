@@ -1,6 +1,7 @@
 import React from "react";
 import Slider from "./Slider";
 import "./Home.css";
+import Navbar from "../Navbar/Navbar";
 
 const service_details = [
   {

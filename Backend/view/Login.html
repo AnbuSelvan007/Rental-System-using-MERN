@@ -75,21 +75,26 @@
     <div class="container">
         <!-- Login Form -->
         <div id="login-form">
+        <form action="/signin" method="post">
             <h2>Login</h2>
-            <input type="email" id="login-email" placeholder="Email" required>
-            <input type="password" id="login-password" placeholder="Password" required>
-            <button class="btn">Login</button>
+            <input type="email" id="login-email" name="email" placeholder="Email" required>
+            <input type="password" id="login-password" name="Password" placeholder="Password" required>
+            <button class="btn" type="submit">Login</button>
             <p class="toggle" onclick="toggleForm()">Don't have an account? Signup</p>
+        </form>
         </div>
 
         <!-- Signup Form -->
         <div id="signup-form" class="hidden">
+            <form action="/signup"  method="post">
             <h2>Signup</h2>
-            <input type="text" id="signup-name" placeholder="Full Name" required>
-            <input type="email" id="signup-email" placeholder="Email" required>
-            <input type="password" id="signup-password" placeholder="Password" required>
-            <button class="btn">Signup</button>
+            <input type="text" name="name" id="signup-name" placeholder="Full Name" required>
+            <input type="email" name="email id="signup-email" placeholder="Email" required>
+            <input type="password" name="password" id="signup-password" placeholder="Password" required>
+            <input type="number" name="phone" id="signup-phone" placeholder="Phone Number" required>
+            <button class="btn" type="submit">Signup</button>
             <p class="toggle" onclick="toggleForm()">Already have an account? Login</p>
+            </form>
         </div>
     </div>
 

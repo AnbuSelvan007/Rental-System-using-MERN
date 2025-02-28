@@ -1,0 +1,287 @@
+.lsContainer {
+    background-repeat: no-repeat;
+    background-size: cover;
+  .loginContainer {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    height: 100vh;
+    form{
+      display: flex;
+      flex-direction: column;
+      width: 40vw;
+      background-color:white;
+      padding: 2vw;
+      border-radius: 20px;
+      gap: 15px;
+      color: black;
+      text-align: center;
+      h1{
+       
+        font-weight: 800;
+      }
+  
+      .email, .password, .user, .phone,button{
+        height: 50px;
+        font-size: 18px;
+        border-radius: 10px;
+        border:none;
+        background-color: rgb(203, 207, 229);
+        text-align: center;
+        transition: 0.5s;
+        padding: 0%;
+      
+        span img{
+          height:20px ;
+          margin-top: 15px;
+        }
+        
+        input{
+          height: 50px;
+          font-size: 18px;
+          border-radius: 10px;
+          border:none;
+          outline: none;
+          border-color: transparent;
+          background-color: rgb(203, 207, 229);
+          text-align: center;
+          transition: 0.5s;
+          height: 100%;
+         
+          width: 90%;
+          float:right;
+
+        }
+       
+      }
+      input:focus{
+        background: transparent;
+      }
+      .email:hover, .password:hover, .user:hover, .phone:hover{
+        box-shadow: 0 0 .2rem #fff,
+        0 0 .2rem #08d704,
+        0 0 2rem #0ac736,
+        0 0 0.8rem #0ac768;
+       
+      }
+
+      button:hover{
+        box-shadow: 0 0 .2rem #fff,
+        0 0 .2rem #08d704,
+        0 0 2rem #0ac736,
+        0 0 0.8rem #0ac768;
+        background-color: orange;
+        
+      }
+     
+    }
+  }
+  .signupContainer {
+   
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    height: 100vh;
+    form{
+      display: flex;
+      flex-direction: column;
+      width: 40vw;
+      background-color:white;
+      padding: 2vw;
+      border-radius: 20px;
+      gap: 15px;
+      color: black;
+      text-align: center;
+      h1{
+       
+        font-weight: 800;
+      }
+  
+      .email, .password, .name, .phone,button{
+        height: 50px;
+        font-size: 18px;
+        border-radius: 10px;
+        border:none;
+        background-color: rgb(203, 207, 229);
+        text-align: center;
+        transition: 0.5s;
+        padding: 0%;
+        span img{
+          height:20px ;
+        }
+        input{
+          height: 50px;
+          font-size: 18px;
+          border-radius: 10px;
+          border:none;
+          outline: none;
+          border-color: transparent;
+          background-color: rgb(203, 207, 229);
+          text-align: center;
+          transition: 0.5s;
+          height: 100%;
+        }
+       
+      }
+    
+      .email:hover, .password:hover, .name:hover, .phone:hover{
+        box-shadow: 0 0 .2rem #fff,
+        0 0 .2rem #08d704,
+        0 0 2rem #0ac736,
+        0 0 0.8rem #0ac768;
+       
+      }
+      button:hover{
+        box-shadow: 0 0 .2rem #fff,
+        0 0 .2rem #08d704,
+        0 0 2rem #0ac736,
+        0 0 0.8rem #0ac768;
+        background-color: orange;
+        
+      }
+     
+    }
+   
+  }
+}
+
+
+@media (max-width:480px) {
+  .lsContainer {
+    background-repeat: no-repeat;
+    background-size: cover;
+  .loginContainer {
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    height: 100vh;
+    form{
+      display: flex;
+      flex-direction: column;
+      width:90vw;
+      background-color:white;
+      padding: 3vw;
+      border-radius: 20px;
+      gap: 15px;
+      color: black;
+      text-align: center;
+      h1{
+       
+        font-weight: 800;
+      }
+      .email, .password, .user, .phone,button{
+        height: 50px;
+        font-size: 18px;
+        border-radius: 10px;
+        border:none;
+        background-color: rgb(203, 207, 229);
+        text-align: center;
+        transition: 0.5s;
+        padding: 0%;
+        border: 1px solid rgb(203, 207, 229);;
+        span img{
+          height:20px ;
+        }
+        input{
+          height: 50px;
+          font-size: 18px;
+          border-radius: 10px;
+          border:none;
+          outline: none;
+          border-color: transparent;
+          background-color: rgb(203, 207, 229);
+          text-align: center;
+          transition: 0.5s;
+          height: 100%;
+          width: 85%;
+        }
+       
+      }
+    
+      .email:hover, .password:hover, .user:hover, .phone:hover{
+        box-shadow: 0 0 .2rem #fff,
+        0 0 .2rem #08d704,
+        0 0 2rem #0ac736,
+        0 0 0.8rem #0ac768;
+       
+      }
+      button:hover{
+        box-shadow: 0 0 .2rem #fff,
+        0 0 .2rem #08d704,
+        0 0 2rem #0ac736,
+        0 0 0.8rem #0ac768;
+        background-color: orange;
+        
+      }
+     
+    }
+  }
+  .signupContainer {
+   
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    height: 100vh;
+    form{
+      display: flex;
+      flex-direction: column;
+      width: 90vw;
+      background-color:white;
+      padding: 3vw;
+      border-radius: 20px;
+      gap: 15px;
+      color: black;
+      text-align: center;
+      h1{
+       
+        font-weight: 800;
+      }
+      .email, .password, .user, .phone,button{
+        height: 50px;
+        font-size: 18px;
+        border-radius: 10px;
+        border:none;
+        background-color: rgb(203, 207, 229);
+        text-align: center;
+        transition: 0.5s;
+        padding: 0%;
+        span img{
+          height:20px ;
+        }
+        input{
+          width: 80%;
+          height: 50px;
+          font-size: 18px;
+          border-radius: 10px;
+          border:none;
+          outline: none;
+          border-color: transparent;
+          background-color: rgb(203, 207, 229);
+          text-align: center;
+          transition: 0.5s;
+          height: 100%;
+        }
+       
+      }
+    
+      .email:hover, .password:hover, .user:hover, .phone:hover{
+        box-shadow: 0 0 .2rem #fff,
+        0 0 .2rem #08d704,
+        0 0 2rem #0ac736,
+        0 0 0.8rem #0ac768;
+       
+      }
+      button:hover{
+        box-shadow: 0 0 .2rem #fff,
+        0 0 .2rem #08d704,
+        0 0 2rem #0ac736,
+        0 0 0.8rem #0ac768;
+        background-color: orange;
+        
+      }
+     
+    }
+  }
+}
+
+}
