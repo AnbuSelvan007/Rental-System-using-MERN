@@ -17,7 +17,7 @@ import Cart from "./components/MyCart/Cart";
 export const UserContext = createContext();
 function App() {
   const location=useLocation();
-  const [userprof,setUserprof]=useState({userName:"undefined",userEmail:"undefined",userPhone:"undefined"})
+  const [userprof,setUserprof]=useState({userName:"anbu",userEmail:"anbu@gmail.com",userPhone:"undefined"})
   return (
     <>
     <UserContext.Provider value={{userprof,setUserprof}}>

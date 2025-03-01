@@ -12,7 +12,7 @@ const serviceData = [
     id: 2,
     name: "Bike",
     route: "/Bikes",
-    img: "https://wallpaperaccess.com/download/bike-8k-3460572",
+    img: "http://wallpapercave.com/wp/wp1860926.jpg",
   },
   {
     id: 3,

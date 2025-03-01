@@ -18,11 +18,13 @@
         
     }
     .userInfo{
+        font-size: 25px;
         position: absolute;
-        height: 30vh;
+        min-height: 30vh;
         width: 30vw;
         top: 30%;
         border-radius: 20px;
+        padding: 5px;
         background-color: white;
         color: black;
        display: flex;
@@ -30,12 +32,30 @@
        align-items: center; 
        justify-content: space-evenly;
        display: none;
+       gap: 20px;
+
+       .userDetails{
+        width: fit-content;
+        text-align: center;
+        border:2px solid black;
+        border-radius: 10px;;
+        padding: 5px;
+       }
        button{
         border:none;
         border-radius: 4px;
-        font-weight: 700;
+        font-weight: 600;
         color: white;
+        width: 70%;
+
        
+       }
+       .btn{
+        width:90%;
+        display: flex;
+        justify-content: space-between;
+       
+    
        }
 
 

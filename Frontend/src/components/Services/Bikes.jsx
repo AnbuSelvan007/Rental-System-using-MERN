@@ -15,9 +15,7 @@ const Bikes = () => {
         console.error("Error fetching bikes:", error);
       }
       finally{
-        setTimeout(() => {
           setLoading(false);
-        }, 5000);
        
       }
     };
@@ -33,7 +31,7 @@ const Bikes = () => {
          
       }
       {loading &&
-          <h1>loading...</h1>
+          <h1 style={{textAlign:"center"}}>loading...</h1>
 
       }
     </div>

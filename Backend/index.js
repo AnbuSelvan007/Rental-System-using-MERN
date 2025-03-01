@@ -11,6 +11,7 @@ const nodemailer=require('nodemailer')
 const {Home_Details,About_Details}=require('./model/HomeAbout')
 const { Bikes, Cars, Vans, Bicycles } = require("./model/serviceDetails");
 const Bookings = require("./model/bookingDetails");
+const Service=require('./model/serviceDetails')
 dotenv.config();
 mdb
   .connect(process.env.MONGODB_URL)
@@ -28,6 +29,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "view", "Login.html"));
 });
 
+//Login.jsx
 app.post("/signup", async (req, res) => {
   try {
     const { name, email, password, phone } = req.body;
@@ -73,7 +75,38 @@ app.post("/signin", async (req, res) => {
   }
 });
 
-// services
+// services.jsx
+app.post("/services", (req, res) => {
+  try {
+    const { name, route, img } = req.body;
+    const newService = new Services({
+      name: name,
+      route:route,
+      img: img,
+    });
+    newService.save();
+    res
+      .status(200)
+      .json({ message: "Service added Successfull", isCarAdded: true });
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({ message: "Service added Unsuccessfull", isCarAdded: false });
+  }
+});
+
+app.get("/services", async (req, res) => {
+  try {
+    const services_details = await Services.find({});
+    if (!services_details) return res.status(404).json({ error: "cars not found" });
+    res.json(services_details);
+  } catch (err) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+//cars.jsx
 app.post("/cars", (req, res) => {
   try {
     const { name, price, img } = req.body;
@@ -94,6 +127,17 @@ app.post("/cars", (req, res) => {
   }
 });
 
+app.get("/cars", async (req, res) => {
+  try {
+    const cars = await Cars.find({});
+    if (!cars) return res.status(404).json({ error: "cars not found" });
+    res.json(cars);
+  } catch (err) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+//vans.jsx
 app.post("/vans", (req, res) => {
   try {
     const { name, price, img } = req.body;
@@ -114,6 +158,17 @@ app.post("/vans", (req, res) => {
   }
 });
 
+app.get("/vans", async (req, res) => {
+  try {
+    const vans = await Vans.find({});
+    if (!vans) return res.status(404).json({ error: "vans not found" });
+    res.json(vans);
+  } catch (err) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+//bikes.jsx
 app.post("/bikes", (req, res) => {
   try {
     const { name, price, img } = req.body;
@@ -134,6 +189,18 @@ app.post("/bikes", (req, res) => {
   }
 });
 
+
+app.get("/bikes", async (req, res) => {
+  try {
+    const bikes = await Bikes.find({});
+    if (!bikes) return res.status(404).json({ error: "bikes not found" });
+    res.json(bikes);
+  } catch (err) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+//bicycles.jsx
 app.post("/bicycles", (req, res) => {
   try {
     const { name, price, img } = req.body;
@@ -154,6 +221,18 @@ app.post("/bicycles", (req, res) => {
   }
 });
 
+app.get("/bicycles", async (req, res) => {
+  try {
+    const bicycles = await Bicycles.find({});
+    if (!bicycles) return res.status(404).json({ error: "bycycles not found" });
+    res.json(bicycles);
+  } catch (err) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
+//bookingdetails.jsx
 app.post("/bookingdetails", (req, res) => {
   try {
     const {
@@ -171,7 +250,7 @@ app.post("/bookingdetails", (req, res) => {
 
     const newBooking = new Bookings({
       customername: customername,
-      price: price,
+      price: price*count,
       phone: phone,
       count: count,
       days: days,
@@ -193,50 +272,13 @@ app.post("/bookingdetails", (req, res) => {
   }
 });
 
-app.get("/cars", async (req, res) => {
-  try {
-    const cars = await Cars.find({});
-    if (!cars) return res.status(404).json({ error: "cars not found" });
-    res.json(cars);
-  } catch (err) {
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
-app.get("/bikes", async (req, res) => {
-  try {
-    const bikes = await Bikes.find({});
-    if (!bikes) return res.status(404).json({ error: "bikes not found" });
-    res.json(bikes);
-  } catch (err) {
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
-app.get("/vans", async (req, res) => {
-  try {
-    const vans = await Vans.find({});
-    if (!vans) return res.status(404).json({ error: "vans not found" });
-    res.json(vans);
-  } catch (err) {
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
-app.get("/bicycles", async (req, res) => {
-  try {
-    const bicycles = await Bicycles.find({});
-    if (!bicycles) return res.status(404).json({ error: "bycycles not found" });
-    res.json(bicycles);
-  } catch (err) {
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
 
 //cart.jsx data
-app.get("/bookingdetails", async (req, res) => {
+app.get("/bookingdetails/:email", async (req, res) => {
   try {
-    const {email}=req.body;
+  
+    const email=req.params.email;
+    console.log(req.body)
     const bookings = await Bookings.find({email });
     if (!bookings) return res.status(404).json({ error: "bookings not found" });
     res.json(bookings);
@@ -246,18 +288,20 @@ app.get("/bookingdetails", async (req, res) => {
 });
 
 app.delete("/bookingdetails/:id", async (req, res) => {
-  try {
-    const deletedItem = await Rental.findByIdAndDelete(req.params.id);
-    if (!deletedItem) {
-      return res.status(404).json({ message: "Item not found" });
+  
+    try {
+      const deletedItem = await Bookings.deleteOne({_id:req.params.id});
+      if (!deletedItem) {
+        return res.status(404).json({ message: "Item not found" });
+      }
+      res.json({ message: "Item deleted successfully", deletedItem });
+    } catch (error) {
+      res.status(500).json({ message: "Error deleting item", error });
     }
-    res.json({ message: "Item deleted successfully", deletedItem });
-  } catch (error) {
-    res.status(500).json({ message: "Error deleting item", error });
-  }
+
 });
 
-//Home.jsx About.jsx
+// About.jsx
 app.get('/about',async(req,res)=>{
   try{
     const data= await About_Details.find({});
@@ -272,40 +316,6 @@ app.get('/about',async(req,res)=>{
   }
   
 
-})
-
-app.get('/home',async(req,res)=>{
-  try{
-    const data= await Home_Details.find({});
-    if(!data)
-      return res.status(404).json({message:"data not found"})
-    res.json(data)
-
-  }
-  catch(err)
-  {
-    res.status(500).json({message:"Internal Error"})
-  }
-  
-
-})
-
-app.post('/home',(req,res)=>{
-   try{
-    const {name,img,para1,para2}=req.body;
-    const newDetail=new Home_Details({
-      name:name,
-      img:img,
-      para1:para1,
-      para2:para2
-    })
-    newDetail.save();
-    res.status(200).json({message:"Home detail Added successfully"})
-   }
-   catch(err)
-   {
-    res.status(500).json({message:"Internal server Error"})
-   }
 })
 
 app.post('/about',(req,res)=>{
@@ -327,22 +337,38 @@ app.post('/about',(req,res)=>{
   }
 })
 
-
-app.get('/Home',(req,res)=>{
+// Home.jsx
+app.get('/home',async(req,res)=>{
   try{
-    const data=Home_Details.find({});
+    const data= await Home_Details.find({});
     if(!data)
-      res.status(404).json({message:"data not found"})
+      return res.status(404).json({message:"data not found"})
     res.json(data)
 
   }
   catch(err)
   {
     res.status(500).json({message:"Internal Error"})
-    console.log(err)
   }
-  
 
+})
+
+app.post('/home',(req,res)=>{
+   try{
+    const {name,img,para1,para2}=req.body;
+    const newDetail=new Home_Details({
+      name:name,
+      img:img,
+      para1:para1,
+      para2:para2
+    })
+    newDetail.save();
+    res.status(200).json({message:"Home detail Added successfully"})
+   }
+   catch(err)
+   {
+    res.status(500).json({message:"Internal server Error"})
+   }
 })
 
 

@@ -30,9 +30,15 @@ const Navbar = () => {
        
       </div>
       <div className={show?"userInfo show":"userInfo"} >
-          <h3>{userprof.userName}</h3>
-          <h3>{userprof.userEmail}</h3>
-          <h3>{userprof.userPhone}</h3>
+           <h2>My Profile</h2>
+           <div className="userDetails">
+              <h3>{userprof.userName}</h3>
+              <h3>{userprof.userEmail}</h3>
+              <h3>{userprof.userPhone}</h3>
+          </div>
+          <div className="cartPage">
+            <Link to="/Cart" onClick={()=>setShow(false)}>My Bookings</Link>
+          </div>
           <div className="btn">
             <button style={{backgroundColor:"green",marginRight:"5px"}} onClick={profileHandler}>Back</button>
             <button style={{backgroundColor:"red",marginLeft:"5px"}} onClick={logoutHandler}>LogOut</button>

@@ -16,7 +16,8 @@ const Card = ({item}) => {
       <div className="textContainer">
         <div className="group">
         <h2>{item.name}</h2>
-        <p>{`${item.price}/Hour`}</p>
+        <p>{`${item.price}/Day`}</p>
+        
         </div>
         <button onClick={submitHandler}>Rent Now</button>
         {/* <button><Link to='/BookingDetails' style={{textDecoration:"none",color:"white"}}>Rent Now</Link></button> */}
