@@ -1,25 +1,40 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../App";
+import axios from "axios";
 import "./BookDetail.css";
+import { useLocation } from "react-router-dom";
+
 const BookDetail = ({ state }) => {
+  const location=useLocation();
+  const {item}=location.state || {};
   const {userprof,setUserprof}=useContext(UserContext)
   const navigate=useNavigate()
-  console.log(data)
+
   const [user, setUser] = useState({
-    name: userprof.userName,
+    customername: userprof.userName,
     phone:userprof.userPhone,
     date: "",
     count: "",
-    price:data,
+    price:item.price,
     days: "",
-    withdriver: false,
+    withdriver:"yes",
+    img:item.img,
+    vehicleName:item.name
   });
-  const submitHandler = (e) => {
+
+  const submitHandler = async(e) => {
     e.preventDefault();
-    console.log(user);
+   try{
+    const response=await axios.post("http://localhost:5000/bookingdetails",user);
+    alert("Booking Successfull and check it in your profile")
     navigate('/Home');
 
+   }
+   catch{
+    alert("some times went Wrong, try again")
+   }
+ 
   };
   const inputHandler = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -34,7 +49,7 @@ const BookDetail = ({ state }) => {
           <label htmlFor="">Customer Name</label>
           <input
             type="text"
-            value={user.name}
+            value={user.customername}
             name="name"
             onChange={inputHandler}
             required

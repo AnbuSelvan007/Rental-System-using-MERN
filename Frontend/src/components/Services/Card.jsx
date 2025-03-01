@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 const Card = ({item}) => {
   const navigate=useNavigate();
     const submitHandler=()=>{
-       navigate('/BookingDetails',{state:item.price})
+       navigate('/BookingDetails',{state:{item:item}})
 
     }
   return (

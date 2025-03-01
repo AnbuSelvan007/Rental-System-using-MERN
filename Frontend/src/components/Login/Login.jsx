@@ -12,6 +12,11 @@ const Login = () => {
   const [newUser, setNewUser] = useState(false);
   const [user,setUser]=useState({name:"",password:"",phone:"",email:""})
   const navigate = useNavigate();
+  useEffect(()=>{
+   
+      setUserprof({userName:user.name,userEmail:user.email,userPhone:user.phone})
+   
+  },[])
 
   const toggleForm = () => {
     setNewUser(prev=>!prev)
@@ -32,6 +37,7 @@ const Login = () => {
        if(isSignUp)
        {
         setUserprof({userName:user.name,userEmail:user.email,userPhone:user.phone})
+       
         console.log(userProf)
          navigate("/Home")
        }
@@ -47,6 +53,7 @@ const Login = () => {
       if(isLogIn) 
       {
         setUserprof({userName:response.data.name,userEmail:user.email,userPhone:response.data.phone})
+        setUser({...user,name:response.data.name,phone:response.data.phone})
         navigate("/Home")
       }
       console.log(response)
@@ -84,9 +91,9 @@ const Login = () => {
          
           <form onSubmit={handleSubmit} >
           <h1>SignUp</h1>
-          <div className="name">
+          <div className="name" >
             <span><img src={name} alt="" /></span>
-            <input type="text" placeholder="FullName" name="name" onChange={handleChange} value={user.name}  required />
+            <input type="text" placeholder="FullName" name="name" onChange={handleChange} value={user.name}  required  />
           </div>
           <div className="email">
             <span><img src={email} alt="" /></span>
