@@ -30,7 +30,7 @@ const Login = () => {
     if(newUser)
     {
      
-       const response=await axios.post("http://localhost:5000/signup",user)
+       const response=await axios.post("https://rental-system-using-mern-2.onrender.com/signup",user)
        const message=response.data.message;
        const isSignUp=response.data.isSignUp;
        alert(message)
@@ -46,7 +46,7 @@ const Login = () => {
      //login
     else
     {
-      const response=await axios.post("http://localhost:5000/signin",user)
+      const response=await axios.post("https://rental-system-using-mern-2.onrender.com/signin",user)
       const message=response.data.message;
       const isLogIn=response.data.isLoggedIn;
       alert(message)

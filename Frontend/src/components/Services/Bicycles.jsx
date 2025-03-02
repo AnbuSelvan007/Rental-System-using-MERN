@@ -7,7 +7,7 @@ const Bicycles = () => {
   useEffect(() => {
     const fetchBicycles = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/bicycles");
+        const response = await axios.get("https://rental-system-using-mern-2.onrender.com/bicycles");
         setBicycleDetails(response.data); 
       } catch (error) {
         console.error("Error fetching vans:", error);

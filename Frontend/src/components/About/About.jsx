@@ -10,7 +10,7 @@ const About = () => {
     const fetchAbout= async()=>{
     try{
       setLoading(true)
-      const response=await axios.get("http://localhost:5000/about").catch((err)=>console.log(err))
+      const response=await axios.get("https://rental-system-using-mern-2.onrender.com/about").catch((err)=>console.log(err))
       setAbout_details(response.data)
       console.log(response)
     }

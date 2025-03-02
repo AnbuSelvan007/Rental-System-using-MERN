@@ -9,7 +9,7 @@ const Bikes = () => {
     const fetchBikes = async () => {
       try {
         setLoading(true)
-        const response = await axios.get("http://localhost:5000/bikes");
+        const response = await axios.get("https://rental-system-using-mern-2.onrender.com/bikes");
         setBikeDetails(response.data); 
       } catch (error) {
         console.error("Error fetching bikes:", error);

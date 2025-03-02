@@ -26,7 +26,7 @@ const BookDetail = ({ state }) => {
   const submitHandler = async(e) => {
     e.preventDefault();
    try{
-    const response=await axios.post("http://localhost:5000/bookingdetails",user);
+    const response=await axios.post("https://rental-system-using-mern-2.onrender.com/bookingdetails",user);
     alert("Booking Successfull and check it in your profile")
     navigate('/Home');
 

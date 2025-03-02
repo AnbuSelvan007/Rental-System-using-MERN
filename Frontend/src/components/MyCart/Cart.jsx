@@ -39,7 +39,7 @@ const Cart = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:5000/bookingdetails/${userprof.userEmail}`
+          `https://rental-system-using-mern-2.onrender.com/bookingdetails/${userprof.userEmail}`
         );
         setCartItems(response.data);
         console.log(emails)
