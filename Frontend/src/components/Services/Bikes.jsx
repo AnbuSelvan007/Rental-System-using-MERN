@@ -23,6 +23,8 @@ const Bikes = () => {
     fetchBikes();
   }, []); 
   return (
+    <>
+    <h1 className='subheading'>BIKE SERVICE</h1>
     <div className='bikesContainer'>
        { !loading &&
         bikeDetails.map((item,index)=>(
@@ -35,6 +37,7 @@ const Bikes = () => {
 
       }
     </div>
+    </>
   )
 }
 

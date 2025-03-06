@@ -2,12 +2,12 @@ import React, { useContext, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faBars, faXmark, faCircleUser } from "@fortawesome/free-solid-svg-icons";
-import { UserContext } from "../../App";
 import "./Navbar.css";
 const Navbar = () => {
-  const {userprof,setUserprof}=useContext(UserContext)
   const [open,setOpen]=useState(false);
   const [show,setShow]=useState(false);
+  
+  const userDetails=JSON.parse(localStorage.getItem("userDetails"));
   const navigate=useNavigate()
   const profileHandler=()=>{
     setShow(prev=>!prev)
@@ -16,7 +16,7 @@ const Navbar = () => {
       const ans=window.confirm('Are you want to LogOut');
       if(ans)
       {
-        setUserprof({userName:"",userEmail:"",userPhone:""})
+        localStorage.removeItem('userDetails')
         navigate('/');
       }
 
@@ -32,9 +32,9 @@ const Navbar = () => {
       <div className={show?"userInfo show":"userInfo"} >
            <h2>My Profile</h2>
            <div className="userDetails">
-              <h3>{userprof.userName}</h3>
-              <h3>{userprof.userEmail}</h3>
-              <h3>{userprof.userPhone}</h3>
+              <h3>{userDetails.UserName}</h3>
+              <h3>{userDetails.UserEmail}</h3>
+              <h3>{userDetails.UserPhone}</h3>
           </div>
           <div className="cartPage">
             <Link to="/Cart" onClick={()=>setShow(false)}>My Bookings</Link>
@@ -49,10 +49,10 @@ const Navbar = () => {
       
        
         <nav className={open?"open":""}>
-          <Link to="/Home">Home</Link>
-          <Link to="/About">About</Link>
-          <Link to="/Services">Services</Link>
-          <Link to="/Complaints">Complaints</Link>
+          <Link to="/Home" onClick={()=>setOpen(false)}>Home</Link>
+          <Link to="/About" onClick={()=>setOpen(false)} >About</Link>
+          <Link to="/Services" onClick={()=>setOpen(false)}>Services</Link>
+          <Link to="/Complaints" onClick={()=>setOpen(false)}>Complaints</Link>
         </nav>
       </div>
     </div>
@@ -61,8 +61,3 @@ const Navbar = () => {
 
 export default Navbar;
 
-{
-  /* <Link to="/Cars">Cars</Link>
-<Link to="/Bikes">Bikes</Link>
-<Link to="/Equipments">Equipments</Link> */
-}

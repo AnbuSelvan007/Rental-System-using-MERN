@@ -57,4 +57,15 @@
   .submit-btn:hover {
     background: #0056b3;
   }
+
+
+  @media (max-width:480px) {
+  
+.complaint-container {
+  max-width: 90vw;
+  
+}
+
+
+  }
   

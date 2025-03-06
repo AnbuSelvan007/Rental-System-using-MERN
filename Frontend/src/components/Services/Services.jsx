@@ -1,39 +1,34 @@
-import React from "react";
+import React,{useState,useEffect}from "react";
 import { Link,useNavigate } from "react-router-dom";
 import './Services.css'
-const serviceData = [
-  {
-    id: 1,
-    name: "Car",
-    route: "/Cars",
-    img: "https://wallpaperaccess.com/full/1656658.jpg",
-  },
-  {
-    id: 2,
-    name: "Bike",
-    route: "/Bikes",
-    img: "http://wallpapercave.com/wp/wp1860926.jpg",
-  },
-  {
-    id: 3,
-    name: "Bicycle",
-    route: "/Bicycles",
-    img: "https://images.pexels.com/photos/100582/pexels-photo-100582.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  },
-  {
-    id: 4,
-    name: "Van",
-    route: "/Vans",
-    img: "https://images.pexels.com/photos/18384420/pexels-photo-18384420/free-photo-of-classic-vw-van.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-  },
-];
+import axios from "axios";
+
 const Services = () => {
   const navigate=useNavigate();
+  const [serviceDetails, setServiceDetails] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+ useEffect(() => {
+   const fetchServices = async () => {
+     try {
+       setLoading(true);
+       const response = await axios.get("https://rental-system-using-mern-2.onrender.com/services");
+       setServiceDetails(response.data); 
+     } catch (error) {
+       console.error("Error fetching vans:", error);
+     }
+     finally{
+       setLoading(false)
+     }
+   };
+
+   fetchServices();
+ }, []); 
   return (
     <div className="serviceContainer">
-      <h1>Services Offered By US</h1>
+      <h1 className="subheading">OUR SERVICES</h1>
       <div className="serviceCards">
-      {serviceData.map((item) => (
+      {serviceDetails.map((item) => (
         <div className="wrapper">
           <div className="card">
           <img src={item.img} alt="" />

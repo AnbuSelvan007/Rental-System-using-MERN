@@ -4,13 +4,19 @@ import axios from 'axios';
 import Card from './Card';
 const Bicycles = () => {
   const [bicycleDetails, setBicycleDetails] = useState([]);
+   const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchBicycles = async () => {
       try {
+        setLoading(true);
         const response = await axios.get("https://rental-system-using-mern-2.onrender.com/bicycles");
         setBicycleDetails(response.data); 
       } catch (error) {
         console.error("Error fetching vans:", error);
+       
+      }
+      finally{
+        setLoading(false);
       }
     };
 
@@ -19,6 +25,8 @@ const Bicycles = () => {
   },[])
 
   return (
+    <>
+    <h1 className='subheading'>BICYCLE SERVICE</h1>
     <div className='bicyclesContainer'>
        {  
         bicycleDetails.map((item,index)=>(
@@ -26,6 +34,7 @@ const Bicycles = () => {
         ))
       }
     </div>
+    </>
   )
 }
 

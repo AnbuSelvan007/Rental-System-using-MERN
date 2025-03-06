@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../App";
 import axios from "axios";
 import "./BookDetail.css";
 import { useLocation } from "react-router-dom";
@@ -8,12 +7,12 @@ import { useLocation } from "react-router-dom";
 const BookDetail = ({ state }) => {
   const location=useLocation();
   const {item}=location.state || {};
-  const {userprof,setUserprof}=useContext(UserContext)
   const navigate=useNavigate()
-
+  const userDetails=JSON.parse(localStorage.getItem("userDetails"));
   const [user, setUser] = useState({
-    customername: userprof.userName,
-    phone:userprof.userPhone,
+    customername: userDetails.UserName,
+    email:userDetails.UserEmail,
+    phone:userDetails.UserPhone,
     date: "",
     count: "",
     price:item.price,
@@ -40,6 +39,8 @@ const BookDetail = ({ state }) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
   return (
+    <>
+    <h1 className="subheading">BOOKING CONFIRMATION</h1>
     <div className="bookdetailContainer">
       <form action="" onSubmit={submitHandler}>
         <div className="heading">
@@ -109,6 +110,7 @@ const BookDetail = ({ state }) => {
         </div>
       </form>
     </div>
+    </>
   );
 };
 

@@ -17,10 +17,8 @@ import Cart from "./components/MyCart/Cart";
 export const UserContext = createContext();
 function App() {
   const location=useLocation();
-  const [userprof,setUserprof]=useState({userName:"anbu",userEmail:"anbu@gmail.com",userPhone:"undefined"})
   return (
     <>
-    <UserContext.Provider value={{userprof,setUserprof}}>
       {location.pathname!=='/' &&  <Navbar />}
         <Routes>
           <Route path="/" element={<Login />} />
@@ -36,7 +34,7 @@ function App() {
           <Route path="/Cart" element={<Cart />} />
 
         </Routes>
-        </UserContext.Provider>
+        
     </>
   );
 }

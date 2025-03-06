@@ -30,6 +30,8 @@ const About = () => {
     
   },[])
   return (
+    <>
+    <h1 className='subheading'>ABOUT US</h1>
     <div className='aboutContainer'>
       {!loading && 
         about_details.map((item)=>(
@@ -41,9 +43,12 @@ const About = () => {
         ))
       }
       {
-        loading && <h1 style={{textAlign:"center"}}>loading...</h1>
+        loading && <div className="loader">
+          <img src="https://icons8.com/preloaders/preloaders/382/Spin%20and%20pulsate.gif" alt="" />
+        </div>
       }
     </div>
+    </>
   )
 }
 

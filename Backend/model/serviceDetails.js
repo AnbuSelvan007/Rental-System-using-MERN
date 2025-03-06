@@ -44,4 +44,4 @@ const Bikes=mdb.model("bike_services",bikeServices)
 const Bicycles=mdb.model("bicycle_services",bicycleServices)
 const Services=mdb.model("services_details",serviceSchema)
 
-module.exports={Cars,Vans,Bikes,Bicycles};
+module.exports={Cars,Vans,Bikes,Bicycles,Services};

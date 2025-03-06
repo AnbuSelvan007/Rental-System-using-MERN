@@ -2,7 +2,7 @@
     
     .wrapper{
         min-height: 80vh;
-        width:95vw;
+        width:70vw;
         margin: auto;
         margin-bottom: 50px;
         border-bottom: 2px solid rgb(89, 85, 85);
@@ -15,7 +15,7 @@
            text-align: center; 
         img{
             object-fit: contain; 
-            width:90%;
+            width:60%;
             border-radius: 20px;
             margin-bottom: 20px;
         }
@@ -32,6 +32,48 @@
                 margin: auto;
                 margin-bottom: 20px;
              }
+        }
+    }
+}
+
+
+
+@media (max-width:480px) {
+    .aboutContainer{
+    
+        .wrapper{
+            min-height: 80vh;
+            width:95vw;
+            margin: auto;
+            margin-bottom: 50px;
+            border-bottom: 2px solid rgb(89, 85, 85);
+            text-align: center;
+            
+            .heading{
+               margin-bottom: 20px;
+            }
+            .img{
+               text-align: center; 
+            img{
+                object-fit: contain; 
+                width:90%;
+                border-radius: 20px;
+                margin-bottom: 20px;
+            }
+              
+            }
+            .para{
+               width:100%;
+               text-align: justify;
+              
+                p{
+                    
+                    width:100%;
+                    font-size: 20px;
+                    margin: auto;
+                    margin-bottom: 20px;
+                 }
+            }
         }
     }
 }

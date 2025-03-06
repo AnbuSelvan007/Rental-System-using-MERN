@@ -6,18 +6,13 @@ import name from '../../../public/assets/name.png'
 import password from '../../../public/assets/password.png'
 import phone from '../../../public/assets/phone.png'
 import email from '../../../public/assets/email.png'
-import { UserContext } from "../../App";
+
 const Login = () => {
-  const {userProf,setUserprof}=useContext(UserContext)
+  const [loading,setLoading]=useState(false)
   const [newUser, setNewUser] = useState(false);
   const [user,setUser]=useState({name:"",password:"",phone:"",email:""})
+  
   const navigate = useNavigate();
-  useEffect(()=>{
-   
-      setUserprof({userName:user.name,userEmail:user.email,userPhone:user.phone})
-   
-  },[])
-
   const toggleForm = () => {
     setNewUser(prev=>!prev)
     setUser({ email: "", password: "", name: "",phone:""});
@@ -29,15 +24,19 @@ const Login = () => {
     //signup
     if(newUser)
     {
-     
+      if(user.phone.length!=10)
+          {
+            return alert("invalid mobile Number ,exceeds 10 digits")
+          }
        const response=await axios.post("https://rental-system-using-mern-2.onrender.com/signup",user)
        const message=response.data.message;
        const isSignUp=response.data.isSignUp;
        alert(message)
        if(isSignUp)
        {
-        setUserprof({userName:user.name,userEmail:user.email,userPhone:user.phone})
-       
+        //setUserprof({userName:user.name,userEmail:user.email,userPhone:user.phone})
+        const userDetails={UserName:user.name,UserEmail:user.email,UserPhone:user.phone}
+       localStorage.setItem("userDetails",JSON.stringify(userDetails));
         console.log(userProf)
          navigate("/Home")
        }
@@ -52,8 +51,10 @@ const Login = () => {
       alert(message)
       if(isLogIn) 
       {
-        setUserprof({userName:response.data.name,userEmail:user.email,userPhone:response.data.phone})
-        setUser({...user,name:response.data.name,phone:response.data.phone})
+        //setUserprof({userName:response.data.name,userEmail:user.email,userPhone:response.data.phone})
+        //setUser({...user,name:response.data.name,phone:response.data.phone})
+        const userDetails={UserName:response.data.name,UserEmail:user.email,UserPhone:response.data.phone}
+        localStorage.setItem("userDetails",JSON.stringify(userDetails));
         navigate("/Home")
       }
       console.log(response)

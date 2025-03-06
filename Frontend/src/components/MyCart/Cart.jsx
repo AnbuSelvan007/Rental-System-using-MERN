@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./Cart.css";
-import { UserContext } from "../../App";
 import axios from "axios";
 import loading from '../../../public/assets/loading.gif'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
@@ -10,8 +9,8 @@ const Cart = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [cartItems, setCartItems] = useState([]);
-  const {userprof,setUserprof}=useContext(UserContext)
   const [emails,setEmails]=useState({email:"anbu@gmail.com",name:"anbu"})
+  const userDetails=JSON.parse(localStorage.getItem("userDetails"))
   const viewHandler = () => {
     setShow((prev) => !prev);
   };
@@ -21,8 +20,9 @@ const Cart = () => {
     {
     try {
       setLoading(true)
+      console.log(item._id)
       const response = await axios.delete(
-        `http://localhost:5000/bookingdetails/${item._id}`
+        `https://rental-system-using-mern-2.onrender.com/bookingdetails/${item._id}`
       );
       fetchData();
     } catch (err) {
@@ -39,11 +39,9 @@ const Cart = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `https://rental-system-using-mern-2.onrender.com/bookingdetails/${userprof.userEmail}`
+          `https://rental-system-using-mern-2.onrender.com/bookingdetails/${userDetails.UserEmail}`
         );
         setCartItems(response.data);
-        console.log(emails)
-        console.log(response)
       } catch (err) {
         setError("Error fetching data");
         console.log(err)
@@ -59,7 +57,7 @@ const Cart = () => {
   return (
     <>
     <div className="heading">
-    <h1>MY CART</h1>
+    <h1 className="subheading">MY CART</h1>
      </div>
      {!loading &&  <div className="cartContainer">
       {cartItems.map((item) => (

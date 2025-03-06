@@ -1,13 +1,12 @@
 import React, { useContext, useState } from "react";
 import "./Complain.css";
-import { UserContext } from "../../App";
 import axios from "axios";
 
 const ComplaintForm = () => {
-  const {userprof,setUserprof}=useContext(UserContext)
+  const userDetails=JSON.parse(localStorage.getItem("userDetails"))
   const [formData, setFormData] = useState({
-    name:userprof.userName,
-    email:userprof.userEmail,
+    name:userDetails.UserName,
+    email:userDetails.UserEmail,
     message: "",
     complaintType:""
   });
@@ -18,16 +17,19 @@ const ComplaintForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // try {
-    //   await axios.post("http://localhost:5000/send-email", formData);
-    //   alert("Complaint submitted successfully!");
-    // } catch (error) {
-    //   alert("Failed to submit complaint.");
-    // }
+    try {
+      await axios.post("http://localhost:5000/complaints", formData);
+      alert("Complaint submitted successfully!");
+    } catch (error) {
+      alert("Failed to submit complaint.");
+    }
     alert(`Dear ${formData.name},\n\nYour complaint regarding "${formData.complaintType}" has been received:\n\n"${formData.message}"\n\nOur team will get back to you shortly.\n\nBest Regards,\nCustomer Support`)
   };
 
   return (
+    <>
+
+      <h1 className="subheading">CUSTOMER CARE</h1>
     <div className="complaint-container">
       <h2>Register Your Complaint</h2>
       <form className="complaint-form" onSubmit={handleSubmit}>
@@ -46,6 +48,8 @@ const ComplaintForm = () => {
         <button type="submit" className="submit-btn">Submit Complaint</button>
       </form>
     </div>
+
+    </>
   );
 };
 

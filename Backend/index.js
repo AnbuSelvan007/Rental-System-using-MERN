@@ -9,9 +9,8 @@ const bodyparser = require("body-parser");
 const cors = require("cors");
 const nodemailer=require('nodemailer')
 const {Home_Details,About_Details}=require('./model/HomeAbout')
-const { Bikes, Cars, Vans, Bicycles } = require("./model/serviceDetails");
+const { Bikes, Cars, Vans, Bicycles,Services } = require("./model/serviceDetails");
 const Bookings = require("./model/bookingDetails");
-const Service=require('./model/serviceDetails')
 dotenv.config();
 mdb
   .connect(process.env.MONGODB_URL)
@@ -98,9 +97,9 @@ app.post("/services", (req, res) => {
 
 app.get("/services", async (req, res) => {
   try {
-    const services_details = await Services.find({});
+    const services_details = await Services.find();
     if (!services_details) return res.status(404).json({ error: "cars not found" });
-    res.json(services_details);
+      res.json(services_details);
   } catch (err) {
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -374,7 +373,7 @@ app.post('/home',(req,res)=>{
 
 
 //complaint mailing UNDER CONSTRUCTION
-app.post("/complaint", async (req, res) => {
+app.post("/complaints", async (req, res) => {
   const { name, email, message,complaintType } = req.body;
 
   if (!name || !email || !complaintType || !message) {
@@ -392,7 +391,7 @@ app.post("/complaint", async (req, res) => {
 
     let mailOptions = {
       from: "narutoshinchan1234@gmail.com",
-      to: email,
+      to:"anbu33023@gmail.com",
       subject: "Complaint Received",
       text: `Dear ${name},\n\nYour complaint regarding "${complaintType}" has been received:\n\n"${message}"\n\nOur team will get back to you shortly.\n\nBest Regards,\nCustomer Support`,
     };
