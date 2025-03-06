@@ -66,7 +66,7 @@
     }
 }
 
-@keyframes slid {
+@keyframes slide {
     0%, 12.5% { transform: translateX(0); }          /* Image 1 */
     13.5%, 25% { transform: translateX(-100vw); }    /* Image 2 */
     26%, 37.5% { transform: translateX(-200vw); }    /* Image 3 */

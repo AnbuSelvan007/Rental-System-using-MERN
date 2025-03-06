@@ -28,6 +28,7 @@ const Login = () => {
           {
             return alert("invalid mobile Number ,exceeds 10 digits")
           }
+      setLoading(true);
        const response=await axios.post("https://rental-system-using-mern-2.onrender.com/signup",user)
        const message=response.data.message;
        const isSignUp=response.data.isSignUp;
@@ -40,24 +41,27 @@ const Login = () => {
         console.log(userProf)
          navigate("/Home")
        }
+       setLoading(false)
         
     }
      //login
     else
     {
+      setLoading(true);
       const response=await axios.post("https://rental-system-using-mern-2.onrender.com/signin",user)
       const message=response.data.message;
       const isLogIn=response.data.isLoggedIn;
       alert(message)
       if(isLogIn) 
       {
-        //setUserprof({userName:response.data.name,userEmail:user.email,userPhone:response.data.phone})
-        //setUser({...user,name:response.data.name,phone:response.data.phone})
         const userDetails={UserName:response.data.name,UserEmail:user.email,UserPhone:response.data.phone}
         localStorage.setItem("userDetails",JSON.stringify(userDetails));
         navigate("/Home")
+        
       }
-      console.log(response)
+      setLoading(false)
+      
+     
       
     }
   };

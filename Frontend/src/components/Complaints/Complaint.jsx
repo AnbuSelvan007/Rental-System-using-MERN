@@ -18,10 +18,10 @@ const ComplaintForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/complaints", formData);
+      await axios.post("https://rental-system-using-mern-2.onrender.com/complaints", formData);
       alert("Complaint submitted successfully!");
     } catch (error) {
-      alert("Failed to submit complaint.");
+      // alert("Failed to submit complaint.");
     }
     alert(`Dear ${formData.name},\n\nYour complaint regarding "${formData.complaintType}" has been received:\n\n"${formData.message}"\n\nOur team will get back to you shortly.\n\nBest Regards,\nCustomer Support`)
   };
