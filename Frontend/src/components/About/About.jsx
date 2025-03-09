@@ -42,9 +42,9 @@ const About = () => {
           </div>
         ))
       }
-      {
-        loading && <div className="loader">
-          <img src="https://icons8.com/preloaders/preloaders/382/Spin%20and%20pulsate.gif" alt="" />
+ {
+        loading && <div className="loader" style={{width:"100vw"}}>
+          <img src="https://usagif.com/wp-content/uploads/loading-86.gif" alt=""  height="80px" style={{textAlign:"center",marginTop:"50%",marginLeft:"40vw"}}/>
         </div>
       }
     </div>

@@ -1,37 +1,38 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./Cart.css";
 import axios from "axios";
-import loading from '../../../public/assets/loading.gif'
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import loading from "../../../public/assets/loading.gif";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const Cart = () => {
   const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [cartItems, setCartItems] = useState([]);
-  const [emails,setEmails]=useState({email:"anbu@gmail.com",name:"anbu"})
-  const userDetails=JSON.parse(localStorage.getItem("userDetails"))
+  const [emails, setEmails] = useState({
+    email: "anbu@gmail.com",
+    name: "anbu",
+  });
+  const userDetails = JSON.parse(localStorage.getItem("userDetails"));
   const viewHandler = () => {
     setShow((prev) => !prev);
   };
   const cancelHandler = async (item) => {
-    const confirm=window.confirm("Are you want to cancel this rent?")
-    if(confirm)
-    {
-    try {
-      setLoading(true)
-      console.log(item._id)
-      const response = await axios.delete(
-        `https://rental-system-using-mern-2.onrender.com/bookingdetails/${item._id}`
-      );
-      fetchData();
-    } catch (err) {
-      setError("Error fetching data");
-    } finally {
-      setLoading(false); // Stop loading after fetching
+    const confirm = window.confirm("Are you want to cancel this rent?");
+    if (confirm) {
+      try {
+        setLoading(true);
+        console.log(item._id);
+        const response = await axios.delete(
+          `https://rental-system-using-mern-2.onrender.com/bookingdetails/${item._id}`
+        );
+        fetchData();
+      } catch (err) {
+        setError("Error fetching data");
+      } finally {
+        setLoading(false); // Stop loading after fetching
+      }
     }
-  }
-   
   };
 
   useEffect(() => {
@@ -44,11 +45,10 @@ const Cart = () => {
         setCartItems(response.data);
       } catch (err) {
         setError("Error fetching data");
-        console.log(err)
+        console.log(err);
       } finally {
-        
-          setLoading(false);
-         // Stop loading after fetching
+        setLoading(false);
+        // Stop loading after fetching
       }
     };
 
@@ -56,78 +56,83 @@ const Cart = () => {
   }, []);
   return (
     <>
-    <div className="heading">
-    <h1 className="subheading">MY CART</h1>
-     </div>
-     {!loading &&  <div className="cartContainer">
-      {cartItems.map((item) => (
-        <>
-          <div className="cartWrapper">
+      <div className="heading">
+        <h1 className="subheading">MY CART</h1>
+      </div>
+      {!loading && (
+        <div className="cartContainer">
+          {cartItems.map((item) => (
+            <>
+              <div className="cartWrapper">
+                <img src={item.img} alt="" />
+                <div className="textContainer">
+                  <h2>{item.name}</h2>
+                  <button onClick={viewHandler}>View</button>
+                </div>
+              </div>
 
-            <img
-              src={item.img}
-              alt=""
-            />
-            <div className="textContainer">
-            <h2>{item.name}</h2>
-            <button onClick={viewHandler}>View</button>
-            </div>
-          </div>
+              <div className={show ? "details show" : "details"}>
+                <h1>Booking Details</h1>
+                <div className="box">
+                  <h2> Name</h2>
+                  <h2>{item.customername}</h2>
+                </div>
+                <div className="box">
+                  <h2>Rent Price</h2>
+                  <h2>{`${item.price}/Day`}</h2>
+                </div>
+                <div className="box">
+                  <h2>Vehicle Count</h2>
+                  <h2>{item.count}</h2>
+                </div>
+                <div className="box">
+                  <h2>Total Days</h2>
+                  <h2>{item.days}</h2>
+                </div>
+                <div className="box">
+                  <h2>Renting Date</h2>
+                  <h2>{item.date}</h2>
+                </div>
 
-          <div className={show ? "details show" : "details"}>
-            <h1>Booking Details</h1>
-            <div className="box">
-              <h2> Name</h2>
-              <h2>{item.customername}</h2>
-            </div>
-            <div className="box">
-              <h2>Rent Price</h2>
-              <h2>{`${item.price}/Day`}</h2>
-            </div>
-            <div className="box">
-              <h2>Vehicle Count</h2>
-              <h2>{item.count}</h2>
-            </div>
-            <div className="box">
-              <h2>Total Days</h2>
-              <h2>{item.days}</h2>
-            </div>
-            <div className="box">
-              <h2>Renting Date</h2>
-              <h2>{item.date}</h2>
-            </div>
+                <div className="box">
+                  <h2>Driver Need</h2>
+                  <h2>{item.withdriver ? "Yes" : "No"}</h2>
+                </div>
 
-            <div className="box">
-              <h2>Driver Need</h2>
-              <h2>{item.withdriver ? "Yes" : "No"}</h2>
-            </div>
-
-            <div className="box">
-              <button
-                style={{ backgroundColor: "green" }}
-                onClick={viewHandler}
-              >
-                Close
-              </button>
-              <button
-                style={{ backgroundColor: "red" }}
-                onClick={()=>cancelHandler(item)}
-              >
-                Cancel Booking
-              </button>
-            </div>
-          </div>
-        </>
-      ))}
-    
-    </div>
-      }
-      {loading && 
-       <h1>loading ...</h1>
-
-      }
-  </>
-
+                <div className="box">
+                  <button
+                    style={{ backgroundColor: "green" }}
+                    onClick={viewHandler}
+                  >
+                    Close
+                  </button>
+                  <button
+                    style={{ backgroundColor: "red" }}
+                    onClick={() => cancelHandler(item)}
+                  >
+                    Cancel Booking
+                  </button>
+                </div>
+              </div>
+            </>
+          ))}
+        </div>
+      )}
+      {loading && (
+        <div className="loader" style={{ width: "100vw" }}>
+          <img
+            src="https://usagif.com/wp-content/uploads/loading-86.gif"
+            alt=""
+            height="80px"
+            style={{
+              textAlign: "center",
+              marginTop: "50%",
+              marginLeft: "40vw",
+            }}
+          />
+        </div>
+      )}
+    </>
   );
 };
 

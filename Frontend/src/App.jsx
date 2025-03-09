@@ -14,11 +14,13 @@ import Bicycles from "./components/Services/Bicycles";
 import Vans from "./components/Services/Vans";
 import BookDetail from "./components/BookingDetails/BookDetail";
 import Cart from "./components/MyCart/Cart";
+import { IndexProvider } from "./components/customHook/IndexContext";
 export const UserContext = createContext();
 function App() {
   const location=useLocation();
   return (
     <>
+    <IndexProvider>
       {location.pathname!=='/' &&  <Navbar />}
         <Routes>
           <Route path="/" element={<Login />} />
@@ -34,6 +36,7 @@ function App() {
           <Route path="/Cart" element={<Cart />} />
 
         </Routes>
+        </IndexProvider>
         
     </>
   );

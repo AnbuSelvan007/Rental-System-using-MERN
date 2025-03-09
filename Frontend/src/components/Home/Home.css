@@ -5,21 +5,27 @@
     }
     /* Slider.jsx */
     .sliderContainer{
+       
         display: flex;
         overflow:hidden;
         height: 80vh;
+        position: sticky;
+      
         .wrapper{
+            
             width: 100vw;
             margin: 0px 15vw 0px 15vw;
             animation: slide 40s linear infinite;
             animation-timing-function: ease-in-out;
             .sliderItem{  
+               
                 height:78vh;
                 width: 70vw;
                 background-color: white;
                 border-radius: 20px;
-                
+              
                 img{
+                   
                      height:72vh; 
                      width: 70vw;  
                      border-radius: 20px  20px 0px  0px;
@@ -125,6 +131,7 @@
             margin-bottom: 20px;
         }
        .wrapper{
+      
         display: flex;
         flex-direction: column;
         border-bottom: 2px solid rgba(68, 65, 65, 0.644);

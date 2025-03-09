@@ -23,8 +23,8 @@ const Cars = () => {
   }, []); 
   return (
     <>
-    <h1 className='subheading'>CAR SERVICE</h1>
-    <div className='carsContainer'>
+ <h1 className='subheading'>CAR SERVICE</h1>
+ {!loading && <div className='carsContainer'>
      
       {  
         carDetails.map((item,index)=>(
@@ -34,6 +34,13 @@ const Cars = () => {
       }
        
     </div>
+    }
+
+    {
+        loading && <div className="loader" style={{width:"100vw"}}>
+          <img src="https://usagif.com/wp-content/uploads/loading-86.gif" alt=""  height="80px" style={{textAlign:"center",marginTop:"50%",marginLeft:"40vw"}}/>
+        </div>
+      }
     </>
   )
 }
