@@ -26,6 +26,7 @@ const Cart = () => {
         const response = await axios.delete(
           `https://rental-system-using-mern-2.onrender.com/bookingdetails/${item._id}`
         );
+        setShow(false);
         fetchData();
       } catch (err) {
         setError("Error fetching data");
@@ -43,6 +44,7 @@ const Cart = () => {
           `https://rental-system-using-mern-2.onrender.com/bookingdetails/${userDetails.UserEmail}`
         );
         setCartItems(response.data);
+        
       } catch (err) {
         setError("Error fetching data");
         console.log(err);
@@ -125,9 +127,9 @@ const Cart = () => {
             alt=""
             height="80px"
             style={{
-              textAlign: "center",
-              marginTop: "50%",
-              marginLeft: "40vw",
+             
+              marginTop: "100px",
+              
             }}
           />
         </div>

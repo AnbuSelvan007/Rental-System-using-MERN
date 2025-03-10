@@ -41,9 +41,7 @@ const Vans = () => {
             alt=""
             height="80px"
             style={{
-              textAlign: "center",
-              marginTop: "50%",
-              marginLeft: "40vw",
+              marginTop: "100px",  
             }}
           />
         </div>
