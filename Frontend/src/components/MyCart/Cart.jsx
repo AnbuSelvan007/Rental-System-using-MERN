@@ -3,7 +3,7 @@ import "./Cart.css";
 import axios from "axios";
 import loading from "../../../public/assets/loading.gif";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import "ldrs/hatch";
+import {hatch} from "ldrs";
 
 const Cart = () => {
   const [show, setShow] = useState(false);

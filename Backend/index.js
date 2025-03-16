@@ -319,10 +319,11 @@ app.delete("/bookingdetails/:id", async (req, res) => {
   
     try {
       const deletedItem = await Bookings.deleteOne({_id:req.params.id});
+      const remaining=await Bookings.find({});
       if (!deletedItem) {
         return res.status(404).json({ message: "Item not found" });
       }
-      res.json({ message: "Item deleted successfully", deletedItem });
+      res.json(remaining);
     } catch (error) {
       res.status(500).json({ message: "Error deleting item", error });
     }
@@ -439,38 +440,6 @@ app.post("/complaint", async (req, res) => {
   }
 });
 
-
-
-// app.post("/complaints", async (req, res) => {
-//   const { name, email, message,complaintType } = req.body;
-
-//   if (!name || !email || !complaintType || !message) {
-//     return res.status(400).json({ message: "All fields are required" });
-//   }
-
-//   try {
-//     let transporter = nodemailer.createTransport({
-//       service: "gmail",
-//       auth: {
-//         user: "pocess,env.EMAIL_USER", // Your Gmail
-//         pass:process.env.EMAIL_PASS, // Use an App Password if needed
-//       },
-//     });
-
-//     let mailOptions = {
-//       from: "narutoshinchan1234@gmail.com",
-//       to:"anbu33023@gmail.com",
-//       subject: "Complaint Received",
-//       text: `Dear ${name},\n\nYour complaint regarding "${complaintType}" has been received:\n\n"${message}"\n\nOur team will get back to you shortly.\n\nBest Regards,\nCustomer Support`,
-//     };
-
-//     await transporter.sendMail(mailOptions);
-//     res.status(200).json({ message: "Complaint submitted successfully. Email sent!" });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Error submitting complaint" });
-//   }
-// });
 
 app.listen(port, () =>
   console.log(`server is running in http://localhost:5000`)
