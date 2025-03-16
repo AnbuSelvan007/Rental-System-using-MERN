@@ -23,9 +23,12 @@ const ComplaintForm = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      await axios.post("https://rental-system-using-mern-2.onrender.com/complaint", formData);
+      await axios.post(
+        "https://rental-system-using-mern-2.onrender.com/complaint",
+        formData
+      );
       alert("Complaint submitted successfully!,check you mail");
-      setFormData({...formData,message:"",subject:""})
+      setFormData({ ...formData, message: "", subject: "" });
     } catch (error) {
       alert("Failed to submit complaint");
       console.log(error);
@@ -84,9 +87,17 @@ const ComplaintForm = () => {
           {loading && (
             <div
               className="loader"
-              style={{ display: "flex", justifyContent: "center" }}
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+              }}
             >
-              <l-hatch size="28" stroke="4" speed="3.5" color="blue"></l-hatch>
+              <img
+                src="https://usagif.com/wp-content/uploads/loading-86.gif"
+                alt=""
+                style={{ height: "40px" }}
+              />
             </div>
           )}
           {!loading && (

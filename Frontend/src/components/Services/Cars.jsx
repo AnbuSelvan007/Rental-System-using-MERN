@@ -37,15 +37,14 @@ const Cars = () => {
 
       {loading && (
         <div className="loader" style={{ width: "100vw" }}>
-          <l-hatch
-            size="48"
-            stroke="4"
-            speed="3.5"
-            color="white"
+          <img
+            src="https://usagif.com/wp-content/uploads/loading-86.gif"
+            alt=""
+            height="80px"
             style={{
-              marginTop: "100px",
+              marginTop: "100px",  
             }}
-          ></l-hatch>
+          />
         </div>
       )}
     </>

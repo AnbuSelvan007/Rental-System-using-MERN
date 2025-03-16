@@ -137,7 +137,11 @@ const Navbar = () => {
             </div>
             {loading && (
               <div className="loader" style={{ width: "100%",display:"flex",justifyContent:"center"}}>
-               <l-hatch size="28" stroke="4" speed="3.5" color="blue"></l-hatch>
+                <img
+                  src="https://usagif.com/wp-content/uploads/loading-86.gif"
+                  alt=""
+                  style={{ height: "40px" }}
+                />
               </div>
             )}
             {!loading &&

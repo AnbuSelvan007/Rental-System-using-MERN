@@ -28,38 +28,38 @@ const Login = () => {
     e.preventDefault();
 
     // Validate phone number (assuming user.phone is a string)
-    if (newUser && (user.phone.length!==10)) {
-      console.log(user.phone.length)
-        return alert("Invalid mobile number, must be 10 digits.");
+    if (newUser && user.phone.length !== 10) {
+      console.log(user.phone.length);
+      return alert("Invalid mobile number, must be 10 digits.");
     }
 
     setLoading(true);
-    
+
     try {
-        const endpoint = newUser 
-            ? "https://rental-system-using-mern-2.onrender.com/signup"
-            : "https://rental-system-using-mern-2.onrender.com/signin";
+      const endpoint = newUser
+        ? "https://rental-system-using-mern-2.onrender.com/signup"
+        : "https://rental-system-using-mern-2.onrender.com/signin";
 
-        const response = await axios.post(endpoint, user);
-        const { message, isSignUp, isLoggedIn, name, phone } = response.data;
+      const response = await axios.post(endpoint, user);
+      const { message, isSignUp, isLoggedIn, name, phone } = response.data;
 
-        alert(message);
+      alert(message);
 
-        if ((newUser && isSignUp) || (!newUser && isLoggedIn)) {
-            const userDetails = {
-                UserName: newUser ? user.name : name,
-                UserEmail: user.email,
-                UserPhone: newUser ? user.phone : phone,
-            };
-            localStorage.setItem("userDetails", JSON.stringify(userDetails));
-            navigate("/Home");
-        }
+      if ((newUser && isSignUp) || (!newUser && isLoggedIn)) {
+        const userDetails = {
+          UserName: newUser ? user.name : name,
+          UserEmail: user.email,
+          UserPhone: newUser ? user.phone : phone,
+        };
+        localStorage.setItem("userDetails", JSON.stringify(userDetails));
+        navigate("/Home");
+      }
     } catch (error) {
-        alert("Something went wrong! Please try again.");
+      alert("Something went wrong! Please try again.");
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
-};
+  };
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -99,8 +99,19 @@ const Login = () => {
             </div>
             <button type="submit">Login</button>
             {loading && (
-              <div className="loader" style={{ width: "100%",display:"flex",justifyContent:"center"}}>
-               <l-hatch size="28" stroke="4" speed="3.5" color="blue"></l-hatch>
+              <div
+                className="loader"
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <img
+                  src="https://usagif.com/wp-content/uploads/loading-86.gif"
+                  alt=""
+                  style={{ height: "40px" }}
+                />
               </div>
             )}
             <p>Don't have an Account?</p>
@@ -167,8 +178,19 @@ const Login = () => {
 
             <button type="submit">SignUp</button>
             {loading && (
-              <div className="loader" style={{ width: "100%",display:"flex",justifyContent:"center"}}>
-               <l-hatch size="28" stroke="4" speed="3.5" color="blue"></l-hatch>
+              <div
+                className="loader"
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <img
+                  src="https://usagif.com/wp-content/uploads/loading-86.gif"
+                  alt=""
+                  style={{ height: "40px" }}
+                />
               </div>
             )}
             <p>Already have an Account?</p>
