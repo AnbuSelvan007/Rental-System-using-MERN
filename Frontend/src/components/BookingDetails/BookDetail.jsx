@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./BookDetail.css";
 import { useLocation } from "react-router-dom";
+import "ldrs/hatch";
 
 const BookDetail = ({ state }) => {
   const location = useLocation();
@@ -118,14 +119,7 @@ const BookDetail = ({ state }) => {
 
       {loading && (
         <div className="loader" style={{ width: "100vw" }}>
-          <img
-            src="https://usagif.com/wp-content/uploads/loading-86.gif"
-            alt=""
-            height="80px"
-            style={{
-              marginTop: "100px",  
-            }}
-          />
+          <l-hatch size="28" stroke="4" speed="3.5" color="blue"></l-hatch>
         </div>
       )}
     </>

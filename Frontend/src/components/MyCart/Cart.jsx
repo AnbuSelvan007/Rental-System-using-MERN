@@ -3,6 +3,7 @@ import "./Cart.css";
 import axios from "axios";
 import loading from "../../../public/assets/loading.gif";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import "ldrs/hatch";
 
 const Cart = () => {
   const [show, setShow] = useState(false);
@@ -44,7 +45,6 @@ const Cart = () => {
           `https://rental-system-using-mern-2.onrender.com/bookingdetails/${userDetails.UserEmail}`
         );
         setCartItems(response.data);
-        
       } catch (err) {
         setError("Error fetching data");
         console.log(err);
@@ -61,7 +61,7 @@ const Cart = () => {
       <div className="heading">
         <h1 className="subheading">MY CART</h1>
       </div>
-      {!loading && (
+      {(!loading && cartItems.length>0)&&(
         <div className="cartContainer">
           {cartItems.map((item) => (
             <>
@@ -120,18 +120,22 @@ const Cart = () => {
           ))}
         </div>
       )}
+      {!loading && (
+        <div className="cartContainer">
+          <h1>No Bookings Found</h1>
+        </div>
+      )}
       {loading && (
         <div className="loader" style={{ width: "100vw" }}>
-          <img
-            src="https://usagif.com/wp-content/uploads/loading-86.gif"
-            alt=""
-            height="80px"
+          <l-hatch
+            size="48"
+            stroke="4"
+            speed="3.5"
+            color="white"
             style={{
-             
               marginTop: "100px",
-              
             }}
-          />
+          ></l-hatch>
         </div>
       )}
     </>

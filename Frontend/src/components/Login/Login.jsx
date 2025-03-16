@@ -6,6 +6,7 @@ import name from "../../../public/assets/name.png";
 import password from "../../../public/assets/password.png";
 import phone from "../../../public/assets/phone.png";
 import email from "../../../public/assets/email.png";
+import "ldrs/hatch";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -27,10 +28,10 @@ const Login = () => {
     e.preventDefault();
 
     // Validate phone number (assuming user.phone is a string)
-    // if (newUser && (user.phone.length !== 10 || isNaN(user.phone))) {
-    //   console.log(user.phone.length)
-    //     return alert("Invalid mobile number, must be 10 digits.");
-    // }
+    if (newUser && (user.phone.length!==10)) {
+      console.log(user.phone.length)
+        return alert("Invalid mobile number, must be 10 digits.");
+    }
 
     setLoading(true);
     
@@ -99,10 +100,7 @@ const Login = () => {
             <button type="submit">Login</button>
             {loading && (
               <div className="loader" style={{ width: "100%",display:"flex",justifyContent:"center"}}>
-                <img
-                  src="https://usagif.com/wp-content/uploads/loading-86.gif"
-                  alt=""
-                 style={{height:"40px"}}/>
+               <l-hatch size="28" stroke="4" speed="3.5" color="blue"></l-hatch>
               </div>
             )}
             <p>Don't have an Account?</p>
@@ -158,11 +156,11 @@ const Login = () => {
                 <img src={phone} alt="" />
               </span>
               <input
-                type="number"
+                type="text"
                 placeholder="Phone Number"
-                name="number"
+                name="phone"
                 onChange={handleChange}
-                value={user.number}
+                value={user.phone}
                 required
               />
             </div>
@@ -170,10 +168,7 @@ const Login = () => {
             <button type="submit">SignUp</button>
             {loading && (
               <div className="loader" style={{ width: "100%",display:"flex",justifyContent:"center"}}>
-                <img
-                  src="https://usagif.com/wp-content/uploads/loading-86.gif"
-                  alt=""
-                 style={{height:"40px"}}/>
+               <l-hatch size="28" stroke="4" speed="3.5" color="blue"></l-hatch>
               </div>
             )}
             <p>Already have an Account?</p>

@@ -20,7 +20,7 @@ const Card = ({item}) => {
         
         </div>
         <button onClick={submitHandler}>Rent Now</button>
-        {/* <button><Link to='/BookingDetails' style={{textDecoration:"none",color:"white"}}>Rent Now</Link></button> */}
+      
       </div>
     </div>
   )

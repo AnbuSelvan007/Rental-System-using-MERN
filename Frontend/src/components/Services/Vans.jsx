@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import axios from "axios";
 import "./Services.css";
+import "ldrs/hatch";
 const Vans = () => {
   const [vanDetails, setVanDetails] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -36,14 +37,15 @@ const Vans = () => {
       )}
       {loading && (
         <div className="loader" style={{ width: "100vw" }}>
-          <img
-            src="https://usagif.com/wp-content/uploads/loading-86.gif"
-            alt=""
-            height="80px"
+          <l-hatch
+            size="48"
+            stroke="4"
+            speed="3.5"
+            color="white"
             style={{
-              marginTop: "100px",  
+              marginTop: "100px",
             }}
-          />
+          ></l-hatch>
         </div>
       )}
     </>

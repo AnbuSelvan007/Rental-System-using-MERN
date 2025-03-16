@@ -22,7 +22,7 @@
         position:absolute;
         font-size: 25px;
         min-height: 30vh;
-        width: 30vw;
+       width: 30vw;
         top: 30%;
         border-radius: 20px;
         padding: 5px;
@@ -35,12 +35,24 @@
        display: none;
        gap: 20px;
         z-index:1;
+
        .userDetails{
         width: fit-content;
         text-align: center;
         border:2px solid black;
         border-radius: 10px;;
         padding: 5px;
+       }
+       .editDetails{
+        width: fit-content;
+        text-align: center;
+        border:2px solid black;
+        border-radius: 10px;;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        
        }
        button{
         border:none;
@@ -126,7 +138,7 @@
         }
         .userInfo{
             position:absolute;
-            height: 300px;
+            min-height: 300px;
             width: 300px;
             top: 200%;
             border-radius: 20px;
@@ -138,6 +150,25 @@
            justify-content: space-evenly;
            display: none;
           
+           .editDetails{
+            width: fit-content;
+            text-align: center;
+            border:2px solid rgb(0, 0, 0);
+            border-radius: 10px;;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 18px;
+            label{
+                width: 100%;
+                float: left;
+            }
+            input{
+                border: 2px solid black;
+            }
+            
+           }
            button{
             border:none;
             border-radius: 4px;

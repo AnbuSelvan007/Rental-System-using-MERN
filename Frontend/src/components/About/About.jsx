@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import "./About.css";
 import axios from "axios";
+import "ldrs/hatch";
 
 const About = () => {
   const [loading, setLoading] = useState(false);
@@ -43,14 +44,15 @@ const About = () => {
           ))}
         {loading && (
           <div className="loader" style={{ width: "100vw" }}>
-            <img
-              src="https://usagif.com/wp-content/uploads/loading-86.gif"
-              alt=""
-              height="80px"
+            <l-hatch
+              size="48"
+              stroke="4"
+              speed="3.5"
+              color="white"
               style={{
-                marginTop: "100px",  
+                marginTop: "100px",
               }}
-            />
+            ></l-hatch>
           </div>
         )}
       </div>

@@ -4,6 +4,7 @@ import axios from "axios";
 import "./Home.css";
 import Navbar from "../Navbar/Navbar";
 import loading from "../../../public/assets/loading.gif";
+import "ldrs/hatch";
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -54,14 +55,7 @@ const Home = () => {
           ))}
         {loading && (
           <div className="loader" style={{ width: "100vw" }}>
-            <img
-              src="https://usagif.com/wp-content/uploads/loading-86.gif"
-              alt=""
-              height="80px"
-              style={{
-                marginTop: "100px",  
-              }}
-            />
+            <l-hatch size="28" stroke="4" speed="3.5" color="blue"></l-hatch>
           </div>
         )}
       </div>
