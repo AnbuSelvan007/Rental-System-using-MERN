@@ -120,7 +120,7 @@ const Cart = () => {
           ))}
         </div>
       )}
-      {!loading && (
+      {!loading && cartItems.length==0 && (
         <div className="cartContainer">
           <h1>No Bookings Found</h1>
         </div>
