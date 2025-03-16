@@ -74,6 +74,35 @@ app.post("/signin", async (req, res) => {
   }
 });
 
+//upadte profile
+app.get("/userdetails/:email", async (req, res) => {
+  try {
+  
+    const email=req.params.email;
+    const userdetails= await user.findOne({email });
+    if (!userdetails) return res.status(404).json({ error: "user not found" });
+    res.json(userdetails);
+  } catch (err) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.patch("/userdetails/:email",async(req,res)=>{
+  try{
+    const email=req.params.email;
+    const updateData=req.body;
+    await user.updateOne({ email: email }, { $set: updateData });
+    const updated= await user.findOne({email});
+    res.json(updated);
+  }
+  catch(err){
+    console.log(err)
+    res.status(500).json({ error:"Internal server error" });
+  }
+    
+
+    
+})
 // services.jsx
 app.post("/services", (req, res) => {
   try {
@@ -373,36 +402,75 @@ app.post('/home',(req,res)=>{
 
 
 //complaint mailing UNDER CONSTRUCTION
-app.post("/complaints", async (req, res) => {
-  const { name, email, message,complaintType } = req.body;
 
-  if (!name || !email || !complaintType || !message) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
+// Create a transporter using Gmail (or another real SMTP provider)
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "narutoshinchan1234@gmail.com", // Your real Gmail
+    pass: "qyvw nxzv morj rcwg", // App password (16-character)
+  },
+});
 
+
+app.post("/complaint", async (req, res) => {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS, // Use App Password, NOT your Gmail password
+    },
+  });
+  
   try {
-    let transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "pocess,env.EMAIL_USER", // Your Gmail
-        pass:process.env.EMAIL_PASS, // Use an App Password if needed
-      },
-    });
-
+    const { to, subject, message,name } = req.body;
     let mailOptions = {
-      from: "narutoshinchan1234@gmail.com",
-      to:"anbu33023@gmail.com",
-      subject: "Complaint Received",
-      text: `Dear ${name},\n\nYour complaint regarding "${complaintType}" has been received:\n\n"${message}"\n\nOur team will get back to you shortly.\n\nBest Regards,\nCustomer Support`,
-    };
-
+            from: '"rentalsupport@gmail.com" <narutoshinchan1234@gmail.com>',
+            to:to,
+            subject: "Complaint Received",
+            text: `Dear ${name},\n\nYour complaint regarding "${subject}" has been received:\n\n"${message}"\n\nOur team will get back to you shortly.\n\nBest Regards,\nQuality Renters Support Team`,
+          };
     await transporter.sendMail(mailOptions);
-    res.status(200).json({ message: "Complaint submitted successfully. Email sent!" });
+    res.json({ success: true, message: "Email sent successfully!"});
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error submitting complaint" });
+    console.error("Email error:", error);
+    res.status(500).json({ success: false, message: "Failed to send email" });
   }
 });
+
+
+
+// app.post("/complaints", async (req, res) => {
+//   const { name, email, message,complaintType } = req.body;
+
+//   if (!name || !email || !complaintType || !message) {
+//     return res.status(400).json({ message: "All fields are required" });
+//   }
+
+//   try {
+//     let transporter = nodemailer.createTransport({
+//       service: "gmail",
+//       auth: {
+//         user: "pocess,env.EMAIL_USER", // Your Gmail
+//         pass:process.env.EMAIL_PASS, // Use an App Password if needed
+//       },
+//     });
+
+//     let mailOptions = {
+//       from: "narutoshinchan1234@gmail.com",
+//       to:"anbu33023@gmail.com",
+//       subject: "Complaint Received",
+//       text: `Dear ${name},\n\nYour complaint regarding "${complaintType}" has been received:\n\n"${message}"\n\nOur team will get back to you shortly.\n\nBest Regards,\nCustomer Support`,
+//     };
+
+//     await transporter.sendMail(mailOptions);
+//     res.status(200).json({ message: "Complaint submitted successfully. Email sent!" });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: "Error submitting complaint" });
+//   }
+// });
 
 app.listen(port, () =>
   console.log(`server is running in http://localhost:5000`)

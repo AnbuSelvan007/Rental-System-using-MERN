@@ -1,14 +1,18 @@
 import React, { useContext, useState } from "react";
 import "./Complain.css";
 import axios from "axios";
+import "ldrs/hatch";
+
+// Default values shown
 
 const ComplaintForm = () => {
   const userDetails = JSON.parse(localStorage.getItem("userDetails"));
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: userDetails.UserName,
-    email: userDetails.UserEmail,
+    to: userDetails.UserEmail,
     message: "",
-    complaintType: "",
+    subject: "",
   });
 
   const handleChange = (e) => {
@@ -18,17 +22,16 @@ const ComplaintForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(
-        "https://rental-system-using-mern-2.onrender.com/complaints",
-        formData
-      );
-      alert("Complaint submitted successfully!");
+      setLoading(true);
+      await axios.post("http://localhost:5000/complaint", formData);
+      alert("Complaint submitted successfully!,check you mail");
+      setFormData({...formData,message:"",subject:""})
     } catch (error) {
-      // alert("Failed to submit complaint.");
+      alert("Failed to submit complaint");
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
-    alert(
-      `Dear ${formData.name},\n\nYour complaint regarding "${formData.complaintType}" has been received:\n\n"${formData.message}"\n\nOur team will get back to you shortly.\n\nBest Regards,\nCustomer Support`
-    );
   };
 
   return (
@@ -45,23 +48,26 @@ const ComplaintForm = () => {
             onChange={handleChange}
             placeholder="Your Name"
             value={formData.name}
+            disabled
           />
 
           <label>Email</label>
           <input
             type="email"
-            name="email"
+            name="to"
             required
             onChange={handleChange}
             placeholder="Your Mail"
-            value={formData.email}
+            value={formData.to}
+            disabled
           />
 
           <label>Complaint Type</label>
           <input
             type="text"
-            name="complaintType"
+            name="subject"
             required
+            value={formData.subject}
             onChange={handleChange}
             placeholder="Complaint Type"
           />
@@ -71,13 +77,23 @@ const ComplaintForm = () => {
             name="message"
             rows="4"
             required
+            value={formData.message}
             onChange={handleChange}
             placeholder="Your Complaint"
           />
-
-          <button type="submit" className="submit-btn">
-            Submit Complaint
-          </button>
+          {loading && (
+            <div
+              className="loader"
+              style={{ display: "flex", justifyContent: "center" }}
+            >
+              <l-hatch size="28" stroke="4" speed="3.5" color="blue"></l-hatch>
+            </div>
+          )}
+          {!loading && (
+            <button type="submit" className="submit-btn" onClick={handleSubmit}>
+              Submit Complaint
+            </button>
+          )}
         </form>
       </div>
     </>
