@@ -306,7 +306,6 @@ app.get("/bookingdetails/:email", async (req, res) => {
   try {
   
     const email=req.params.email;
-    console.log(req.body)
     const bookings = await Bookings.find({email });
     if (!bookings) return res.status(404).json({ error: "bookings not found" });
     res.json(bookings);
@@ -319,7 +318,8 @@ app.delete("/bookingdetails/:id", async (req, res) => {
   
     try {
       const deletedItem = await Bookings.deleteOne({_id:req.params.id});
-      const remaining=await Bookings.find({});
+      const {email}=req.body;
+      const remaining=await Bookings.find({email});
       if (!deletedItem) {
         return res.status(404).json({ message: "Item not found" });
       }

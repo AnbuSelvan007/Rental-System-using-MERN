@@ -25,10 +25,10 @@ const Cart = () => {
         setLoading(true);
         console.log(item._id);
         const response = await axios.delete(
-          `https://rental-system-using-mern-2.onrender.com/bookingdetails/${item._id}`
+          `https://rental-system-using-mern-2.onrender.com/bookingdetails/${item._id}`,{email:userDetails.UserEmail}
         );
         setShow(false);
-        fetchData();
+        setCartItems(response.data);
       } catch (err) {
         setError("Error fetching data");
       } finally {
