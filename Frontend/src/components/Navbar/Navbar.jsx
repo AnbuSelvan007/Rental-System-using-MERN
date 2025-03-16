@@ -48,7 +48,7 @@ const Navbar = () => {
   const saveHandler=async()=>{
     try{
       setLoading(true)
-      const response=await axios.patch(`http://localhost:5000/userdetails/${userDetails.UserEmail}`,updateDetails);
+      const response=await axios.patch(`https://rental-system-using-mern-2.onrender.com/userdetails/${userDetails.UserEmail}`,updateDetails);
       userDetails.UserName=response.data.name;
       userDetails.UserPhone=response.data.phone;
       localStorage.setItem("userDetails",JSON.stringify(userDetails))

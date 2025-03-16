@@ -23,7 +23,7 @@ const ComplaintForm = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      await axios.post("http://localhost:5000/complaint", formData);
+      await axios.post("https://rental-system-using-mern-2.onrender.com/complaint", formData);
       alert("Complaint submitted successfully!,check you mail");
       setFormData({...formData,message:"",subject:""})
     } catch (error) {
