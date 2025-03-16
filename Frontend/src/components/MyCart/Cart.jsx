@@ -25,10 +25,11 @@ const Cart = () => {
         setLoading(true);
         console.log(item._id);
         const response = await axios.delete(
-          `https://rental-system-using-mern-2.onrender.com/bookingdetails/${item._id}`,{email:userDetails.UserEmail}
+          `https://rental-system-using-mern-2.onrender.com/bookingdetails/${item._id}`
         );
         setShow(false);
-        setCartItems(response.data);
+        alert("Booking cancelled successfully, please refresh the page")
+        fetchData();
       } catch (err) {
         setError("Error fetching data");
       } finally {

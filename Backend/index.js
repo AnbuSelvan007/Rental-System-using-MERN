@@ -318,12 +318,10 @@ app.delete("/bookingdetails/:id", async (req, res) => {
   
     try {
       const deletedItem = await Bookings.deleteOne({_id:req.params.id});
-      const {email}=req.body;
-      const remaining=await Bookings.find({email});
       if (!deletedItem) {
         return res.status(404).json({ message: "Item not found" });
       }
-      res.json(remaining);
+      res.json({ message: "Item deleted successfully", deletedItem });
     } catch (error) {
       res.status(500).json({ message: "Error deleting item", error });
     }
