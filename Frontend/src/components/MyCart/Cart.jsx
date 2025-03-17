@@ -3,7 +3,9 @@ import "./Cart.css";
 import axios from "axios";
 import loading from "../../../public/assets/loading.gif";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import {hatch} from "ldrs";
+import { hatch } from "ldrs";
+import Loader from "../Loaders/Loader";
+
 
 const Cart = () => {
   const [show, setShow] = useState(false);
@@ -28,7 +30,7 @@ const Cart = () => {
           `https://rental-system-using-mern-2.onrender.com/bookingdetails/${item._id}`
         );
         setShow(false);
-        alert("Booking cancelled successfully, please refresh the page")
+        alert("Booking cancelled successfully, please refresh the page");
         fetchData();
       } catch (err) {
         setError("Error fetching data");
@@ -62,7 +64,7 @@ const Cart = () => {
       <div className="heading">
         <h1 className="subheading">MY CART</h1>
       </div>
-      {(!loading && cartItems.length>0)&&(
+      {!loading && cartItems.length > 0 && (
         <div className="cartContainer">
           {cartItems.map((item) => (
             <>
@@ -121,22 +123,13 @@ const Cart = () => {
           ))}
         </div>
       )}
-      {!loading && cartItems.length==0 && (
+      {!loading && cartItems.length == 0 && (
         <div className="cartContainer">
           <h1>No Bookings Found</h1>
         </div>
       )}
       {loading && (
-        <div className="loader" style={{ width: "100vw" }}>
-          <img
-            src="https://usagif.com/wp-content/uploads/loading-86.gif"
-            alt=""
-            height="80px"
-            style={{
-              marginTop: "100px",  
-            }}
-          />
-        </div>
+        <Loader/>
       )}
     </>
   );

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./BookDetail.css";
 import { useLocation } from "react-router-dom";
+import MiniLoader from "../Loaders/MiniLoader";
+import Loader from "../Loaders/Loader";
 
 const BookDetail = ({ state }) => {
   const location = useLocation();
@@ -117,16 +119,7 @@ const BookDetail = ({ state }) => {
       )}
 
       {loading && (
-        <div className="loader" style={{ width: "100vw" }}>
-          <img
-            src="https://usagif.com/wp-content/uploads/loading-86.gif"
-            alt=""
-            height="80px"
-            style={{
-              marginTop: "100px",  
-            }}
-          />
-        </div>
+        <Loader/>
       )}
     </>
   );

@@ -3,6 +3,7 @@ import Navbar from "../Navbar/Navbar";
 import "./About.css";
 import axios from "axios";
 import "ldrs/hatch";
+import Loader from "../Loaders/Loader";
 
 const About = () => {
   const [loading, setLoading] = useState(false);
@@ -43,16 +44,7 @@ const About = () => {
             </div>
           ))}
         {loading && (
-          <div className="loader" style={{ width: "100vw" }}>
-            <img
-              src="https://usagif.com/wp-content/uploads/loading-86.gif"
-              alt=""
-              height="80px"
-              style={{
-                marginTop: "100px",  
-              }}
-            />
-          </div>
+           <Loader/>
         )}
       </div>
     </>

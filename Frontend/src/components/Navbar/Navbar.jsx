@@ -11,6 +11,7 @@ import { useIndexContext } from "../customHook/IndexContext";
 import axios from "axios";
 import "ldrs/hatch";
 import "./Navbar.css";
+import MiniLoader from "../Loaders/MiniLoader";
 
 
 const Navbar = () => {
@@ -136,13 +137,7 @@ const Navbar = () => {
               </div>
             </div>
             {loading && (
-              <div className="loader" style={{ width: "100%",display:"flex",justifyContent:"center"}}>
-                <img
-                  src="https://usagif.com/wp-content/uploads/loading-86.gif"
-                  alt=""
-                  style={{ height: "40px" }}
-                />
-              </div>
+              <MiniLoader/>
             )}
             {!loading &&
             <div className="btn">

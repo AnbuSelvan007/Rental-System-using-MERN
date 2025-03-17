@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import "./Complain.css";
 import axios from "axios";
 import "ldrs/hatch";
+import MiniLoader from "../Loaders/MiniLoader";
 
 // Default values shown
 
@@ -85,20 +86,7 @@ const ComplaintForm = () => {
             placeholder="Your Complaint"
           />
           {loading && (
-            <div
-              className="loader"
-              style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <img
-                src="https://usagif.com/wp-content/uploads/loading-86.gif"
-                alt=""
-                style={{ height: "40px" }}
-              />
-            </div>
+           <MiniLoader/>
           )}
           {!loading && (
             <button type="submit" className="submit-btn" onClick={handleSubmit}>

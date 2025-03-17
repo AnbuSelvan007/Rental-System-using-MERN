@@ -3,6 +3,7 @@ import Card from "./Card";
 import axios from "axios";
 import "./Services.css";
 import "ldrs/hatch";
+import Loader from "../Loaders/Loader";
 const Vans = () => {
   const [vanDetails, setVanDetails] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -36,16 +37,7 @@ const Vans = () => {
         </div>
       )}
       {loading && (
-        <div className="loader" style={{ width: "100vw" }}>
-           <img
-            src="https://usagif.com/wp-content/uploads/loading-86.gif"
-            alt=""
-            height="80px"
-            style={{
-              marginTop: "100px",  
-            }}
-          />
-        </div>
+        <Loader/>
       )}
     </>
   );

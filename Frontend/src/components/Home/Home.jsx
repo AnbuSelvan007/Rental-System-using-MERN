@@ -5,6 +5,7 @@ import "./Home.css";
 import Navbar from "../Navbar/Navbar";
 import loading from "../../../public/assets/loading.gif";
 import "ldrs/hatch";
+import Loader from "../Loaders/Loader";
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -54,9 +55,7 @@ const Home = () => {
             </>
           ))}
         {loading && (
-          <div className="loader" style={{ width: "100vw" }}>
-            <l-hatch size="28" stroke="4" speed="3.5" color="blue"></l-hatch>
-          </div>
+          <Loader/>
         )}
       </div>
     </div>

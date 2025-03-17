@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import "./Services.css";
 import "ldrs/hatch";
+import Loader from "../Loaders/Loader";
 
 const Bikes = () => {
   const [bikeDetails, setBikeDetails] = useState([]);
@@ -33,16 +34,7 @@ const Bikes = () => {
       </div>
 
       {loading && (
-        <div className="loader" style={{ width: "100vw" }}>
-          <img
-            src="https://usagif.com/wp-content/uploads/loading-86.gif"
-            alt=""
-            height="80px"
-            style={{
-              marginTop: "100px",  
-            }}
-          />
-        </div>
+         <Loader/>
       )}
     </>
   );

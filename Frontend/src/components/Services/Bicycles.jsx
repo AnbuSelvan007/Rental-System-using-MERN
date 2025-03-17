@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Services.css";
 import axios from "axios";
 import Card from "./Card";
+import Loader from "../Loaders/Loader";
 const Bicycles = () => {
   const [bicycleDetails, setBicycleDetails] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -35,16 +36,7 @@ const Bicycles = () => {
       )}
 
       {loading && (
-        <div className="loader" style={{ width: "100vw" }}>
-          <img
-            src="https://usagif.com/wp-content/uploads/loading-86.gif"
-            alt=""
-            height="80px"
-            style={{
-              marginTop: "100px",  
-            }}
-          />
-        </div>
+        <Loader/>
       )}
     </>
   );

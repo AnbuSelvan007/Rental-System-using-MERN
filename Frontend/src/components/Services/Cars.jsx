@@ -3,6 +3,7 @@ import Card from "./Card";
 import "./Services.css";
 import axios from "axios";
 import "ldrs/hatch";
+import Loader from "../Loaders/Loader";
 
 const Cars = () => {
   const [carDetails, setCarDetails] = useState([]);
@@ -36,16 +37,7 @@ const Cars = () => {
       )}
 
       {loading && (
-        <div className="loader" style={{ width: "100vw" }}>
-          <img
-            src="https://usagif.com/wp-content/uploads/loading-86.gif"
-            alt=""
-            height="80px"
-            style={{
-              marginTop: "100px",  
-            }}
-          />
-        </div>
+        <Loader/>
       )}
     </>
   );

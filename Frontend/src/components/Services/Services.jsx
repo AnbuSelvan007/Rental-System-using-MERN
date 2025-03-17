@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Services.css";
 import axios from "axios";
 import "ldrs/hatch";
+import Loader from "../Loaders/Loader";
 
 const Services = () => {
   const navigate = useNavigate();
@@ -47,16 +48,7 @@ const Services = () => {
       )}
 
       {loading && (
-        <div className="loader" style={{ width: "100vw" }}>
-          <img
-            src="https://usagif.com/wp-content/uploads/loading-86.gif"
-            alt=""
-            height="80px"
-            style={{
-              marginTop: "100px",  
-            }}
-          />
-        </div>
+        <Loader/>
       )}
     </>
   );

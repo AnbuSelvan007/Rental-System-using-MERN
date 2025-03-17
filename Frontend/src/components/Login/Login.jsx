@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import {HashLoader} from 'react-spinners'
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,6 +8,7 @@ import password from "../../../public/assets/password.png";
 import phone from "../../../public/assets/phone.png";
 import email from "../../../public/assets/email.png";
 import "ldrs/hatch";
+import MiniLoader from "../Loaders/MiniLoader";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -99,20 +101,7 @@ const Login = () => {
             </div>
             <button type="submit">Login</button>
             {loading && (
-              <div
-                className="loader"
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <img
-                  src="https://usagif.com/wp-content/uploads/loading-86.gif"
-                  alt=""
-                  style={{ height: "40px" }}
-                />
-              </div>
+              <MiniLoader/>
             )}
             <p>Don't have an Account?</p>
             <button onClick={toggleForm}>SignUp</button>
@@ -178,20 +167,7 @@ const Login = () => {
 
             <button type="submit">SignUp</button>
             {loading && (
-              <div
-                className="loader"
-                style={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <img
-                  src="https://usagif.com/wp-content/uploads/loading-86.gif"
-                  alt=""
-                  style={{ height: "40px" }}
-                />
-              </div>
+             <MiniLoader/>
             )}
             <p>Already have an Account?</p>
             <button onClick={toggleForm}>Login</button>
