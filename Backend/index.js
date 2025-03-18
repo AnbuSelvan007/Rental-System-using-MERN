@@ -403,13 +403,7 @@ app.post('/home',(req,res)=>{
 //complaint mailing UNDER CONSTRUCTION
 
 // Create a transporter using Gmail (or another real SMTP provider)
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: "narutoshinchan1234@gmail.com", // Your real Gmail
-    pass: "qyvw nxzv morj rcwg", // App password (16-character)
-  },
-});
+
 
 
 app.post("/complaint", async (req, res) => {
